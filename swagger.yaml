@@ -1,0 +1,158 @@
+---
+swagger: "2.0"
+info:
+  description: "Topological Inventory Ingest API"
+  version: "0.0.1"
+  title: "Topological Inventory Ingest API"
+  contact:
+    email: "agrare@redhat.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/insights/topological_inventory/ingress_api/0.0.1"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+paths:
+  /inventory:
+    post:
+      tags:
+      - "admins"
+      summary: "save inventory"
+      description: "Submits a payload to be persisted to the database"
+      operationId: "saveInventory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "inventory"
+        description: "Inventory payload"
+        required: false
+        schema:
+          $ref: "#/definitions/Inventory"
+      responses:
+        201:
+          description: "inventory saved"
+        400:
+          description: "invalid input, inventory invalid"
+  /schemas:
+    get:
+      tags:
+      - "developers"
+      summary: "searches schemas"
+      description: "By passing in the appropriate options, you can search for\navailable\
+        \ inventory schemas in the system\n"
+      operationId: "searchSchemas"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "searchString"
+        in: "query"
+        description: "pass an optional search string for looking up schemas"
+        required: false
+        type: "string"
+      - name: "skip"
+        in: "query"
+        description: "number of records to skip for pagination"
+        required: false
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "maximum number of records to return"
+        required: false
+        type: "integer"
+        maximum: 50
+        minimum: 0
+        format: "int32"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Schema"
+        400:
+          description: "bad input parameter"
+definitions:
+  Schema:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+    example:
+      name: "name"
+  Source:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Widget Adapter"
+    example:
+      name: "Widget Adapter"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  Inventory:
+    type: "object"
+    required:
+    - "schema"
+    - "source"
+    properties:
+      name:
+        type: "string"
+      schema:
+        $ref: "#/definitions/Schema"
+      source:
+        $ref: "#/definitions/Source"
+      collections:
+        type: "array"
+        items:
+          $ref: "#/definitions/InventoryCollection"
+    example:
+      schema:
+        name: "name"
+      collections:
+      - data:
+        - {}
+        - {}
+        name: "name"
+      - data:
+        - {}
+        - {}
+        name: "name"
+      name: "name"
+      source:
+        name: "Widget Adapter"
+        id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  InventoryCollection:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/InventoryObject"
+    example:
+      data:
+      - {}
+      - {}
+      name: "name"
+  InventoryObject:
+    type: "object"
