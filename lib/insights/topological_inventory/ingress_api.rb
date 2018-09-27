@@ -22,6 +22,7 @@ module Insights
           :protocol => :Kafka,
           :host     => "localhost",
           :port     => "9092",
+          :encoding => "json",
         }
       end
     end

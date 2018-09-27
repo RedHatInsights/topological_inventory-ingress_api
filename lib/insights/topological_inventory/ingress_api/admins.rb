@@ -18,7 +18,13 @@ module Insights
         }
         ]}) do
       cross_origin
-      # the guts live here
+
+      messaging_client.publish_topic(
+        :service => "insights-topological_inventory-persister",
+        :event   => "inventory",
+        :sender  => "insights-topological_inventory-ingress_api",
+        :payload => JSON.load(request.body.read),
+      )
 
       {"message" => "yes, it worked"}.to_json
     end
