@@ -1,0 +1,15 @@
+/.bundle/
+/.idea/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+/Gemfile.lock
+/.byebug_history
+
+# rspec failure tracking
+.rspec_status
