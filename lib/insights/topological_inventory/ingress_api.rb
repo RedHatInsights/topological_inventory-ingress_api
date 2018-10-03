@@ -20,8 +20,8 @@ module Insights
       def messaging_opts
         {
           :protocol => :Kafka,
-          :host     => "localhost",
-          :port     => "9092",
+          :host     => ENV["QUEUE_HOST"] || "localhost",
+          :port     => ENV["QUEUE_PORT"] || "9092",
           :encoding => "json",
         }
       end
