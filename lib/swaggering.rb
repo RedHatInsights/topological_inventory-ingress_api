@@ -22,6 +22,9 @@ class Swaggering < Sinatra::Base
   attr_accessor :configuration
 
   def self.configure
+    set    :server, "thin"
+    enable :logging
+
     get("/resources" + @@configuration.format_specifier) {
       cross_origin
       Swaggering.to_resource_listing
