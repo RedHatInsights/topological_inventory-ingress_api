@@ -130,10 +130,28 @@ definitions:
         - {}
         - {}
         name: "name"
+        all_manager_uuids:
+        - "all_manager_uuids"
+        - "all_manager_uuids"
+        partial_data:
+        - null
+        - null
+        manager_uuids:
+        - "manager_uuids"
+        - "manager_uuids"
       - data:
         - {}
         - {}
         name: "name"
+        all_manager_uuids:
+        - "all_manager_uuids"
+        - "all_manager_uuids"
+        partial_data:
+        - null
+        - null
+        manager_uuids:
+        - "manager_uuids"
+        - "manager_uuids"
       name: "name"
       source:
         name: "Widget Adapter"
@@ -145,7 +163,19 @@ definitions:
     properties:
       name:
         type: "string"
+      manager_uuids:
+        type: "array"
+        items:
+          type: "string"
+      all_manager_uuids:
+        type: "array"
+        items:
+          type: "string"
       data:
+        type: "array"
+        items:
+          $ref: "#/definitions/InventoryObject"
+      partial_data:
         type: "array"
         items:
           $ref: "#/definitions/InventoryObject"
@@ -154,5 +184,103 @@ definitions:
       - {}
       - {}
       name: "name"
+      all_manager_uuids:
+      - "all_manager_uuids"
+      - "all_manager_uuids"
+      partial_data:
+      - null
+      - null
+      manager_uuids:
+      - "manager_uuids"
+      - "manager_uuids"
   InventoryObject:
     type: "object"
+  InventoryObjectLazy:
+    type: "object"
+    required:
+    - "index_data"
+    - "inventory_collection_name"
+    properties:
+      inventory_collection_name:
+        type: "string"
+      index_data:
+        type: "object"
+        properties: {}
+  ContainerProject:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "name"
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        display_name:
+          type: "string"
+        resource_version:
+          type: "string"
+  ContainerGroup:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "name"
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        resource_version:
+          type: "string"
+        container_project:
+          $ref: "#/definitions/InventoryObjectLazy"
+  ServiceInstance:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "name"
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        service_offering:
+          $ref: "#/definitions/InventoryObjectLazy"
+        service_parameters_set:
+          $ref: "#/definitions/InventoryObjectLazy"
+  ServiceOffering:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "name"
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+  ServiceParametersSet:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "name"
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        service_offering:
+          $ref: "#/definitions/InventoryObjectLazy"
