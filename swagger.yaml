@@ -10,7 +10,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "virtserver.swaggerhub.com"
-basePath: "/insights/topological_inventory/ingress_api/0.0.1"
+basePath: "/topological_inventory/ingress_api/0.0.1"
 tags:
 - name: "admins"
   description: "Secured Admin-only calls"

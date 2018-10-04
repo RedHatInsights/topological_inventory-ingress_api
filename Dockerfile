@@ -10,7 +10,7 @@ RUN yum -y install --setopt=tsflags=nodocs \
                    && \
     yum clean all
 
-ENV WORKDIR /opt/insights-topological_inventory-ingress_api/
+ENV WORKDIR /opt/topological_inventory-ingress_api/
 WORKDIR $WORKDIR
 
 COPY Gemfile $WORKDIR
