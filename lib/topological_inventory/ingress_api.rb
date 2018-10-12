@@ -7,7 +7,7 @@ module TopologicalInventory
     require "topological_inventory/ingress_api/developers"
 
     self.configure do |config|
-      config.api_version = "0.0.1"
+      config.api_version = "0.0.2"
     end
 
     private
