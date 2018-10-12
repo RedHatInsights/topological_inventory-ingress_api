@@ -1,7 +1,7 @@
 require "json"
 
 module TopologicalInventory
-  IngressApi.add_route("POST", "/topological_inventory/ingress_api/0.0.1/inventory", {
+  IngressApi.add_route("POST", "/topological_inventory/ingress_api/0.0.2/inventory", {
     "resourcePath" => "/Admins",
     "summary" => "save inventory",
     "nickname" => "save_inventory", 

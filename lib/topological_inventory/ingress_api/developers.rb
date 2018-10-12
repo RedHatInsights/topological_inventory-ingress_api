@@ -1,7 +1,7 @@
 require "json"
 
 module TopologicalInventory
-  IngressApi.add_route("GET", "/topological_inventory/ingress_api/0.0.1/schemas", {
+  IngressApi.add_route("GET", "/topological_inventory/ingress_api/0.0.2/schemas", {
     "resourcePath" => "/Developers",
     "summary" => "searches schemas",
     "nickname" => "search_schemas", 
