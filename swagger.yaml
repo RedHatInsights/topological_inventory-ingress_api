@@ -363,5 +363,11 @@ definitions:
         source_deleted_at:
           type: "string"
           format: "date-time"
+        create_json_schema:
+          type: "object"
+          properties: {}
+        update_json_schema:
+          type: "object"
+          properties: {}
         service_offering:
           $ref: "#/definitions/InventoryObjectLazy"
