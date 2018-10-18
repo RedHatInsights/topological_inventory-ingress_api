@@ -323,7 +323,7 @@ definitions:
           format: "date-time"
         service_offering:
           $ref: "#/definitions/InventoryObjectLazy"
-        service_parameters_set:
+        service_plans:
           $ref: "#/definitions/InventoryObjectLazy"
   ServiceOffering:
     allOf:
@@ -344,7 +344,7 @@ definitions:
         source_deleted_at:
           type: "string"
           format: "date-time"
-  ServiceParametersSet:
+  ServicePlan:
     allOf:
     - $ref: "#/definitions/InventoryObject"
     - type: "object"
