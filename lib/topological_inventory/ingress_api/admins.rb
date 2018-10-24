@@ -18,10 +18,9 @@ module TopologicalInventory
       ]}) do
     cross_origin
 
-    messaging_client.publish_topic(
+    messaging_client.publish_message(
       :service => "topological_inventory-persister",
-      :event   => "inventory",
-      :sender  => "topological_inventory-ingress_api",
+      :message => "save_inventory",
       :payload => JSON.load(request.body.read),
     )
 
