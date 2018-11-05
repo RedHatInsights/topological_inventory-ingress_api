@@ -79,29 +79,107 @@ securityDefinitions:
   UserSecurity:
     type: "basic"
 definitions:
-  Schema:
-    type: "object"
-    properties:
-      name:
-        type: "string"
-    example:
-      name: "name"
-  Source:
-    type: "object"
-    required:
-    - "id"
-    - "name"
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
-        type: "string"
-        example: "Widget Adapter"
-    example:
-      name: "Widget Adapter"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  ContainerGroup:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        resource_version:
+          type: "string"
+        source_created_at:
+          type: "string"
+          format: "date-time"
+        source_deleted_at:
+          type: "string"
+          format: "date-time"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
+        container_project:
+          $ref: "#/definitions/InventoryObjectLazy"
+        container_node:
+          $ref: "#/definitions/InventoryObjectLazy"
+  ContainerNode:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        resource_version:
+          type: "string"
+        name:
+          type: "string"
+        cpus:
+          type: "integer"
+        memory:
+          type: "integer"
+        source_created_at:
+          type: "string"
+          format: "date-time"
+        source_deleted_at:
+          type: "string"
+          format: "date-time"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
+  ContainerProject:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "name"
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        display_name:
+          type: "string"
+        resource_version:
+          type: "string"
+        source_created_at:
+          type: "string"
+          format: "date-time"
+        source_deleted_at:
+          type: "string"
+          format: "date-time"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
+  ContainerTemplate:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        resource_version:
+          type: "string"
+        source_created_at:
+          type: "string"
+          format: "date-time"
+        source_deleted_at:
+          type: "string"
+          format: "date-time"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
+        container_project:
+          $ref: "#/definitions/InventoryObjectLazy"
   Inventory:
     type: "object"
     required:
@@ -210,107 +288,13 @@ definitions:
         properties: {}
       transform_nested_lazy_finds:
         type: "boolean"
-  ContainerGroup:
-    allOf:
-    - $ref: "#/definitions/InventoryObject"
-    - type: "object"
-      required:
-      - "source_ref"
-      properties:
-        source_ref:
-          type: "string"
-        name:
-          type: "string"
-        resource_version:
-          type: "string"
-        source_created_at:
-          type: "string"
-          format: "date-time"
-        source_deleted_at:
-          type: "string"
-          format: "date-time"
-        resource_timestamp:
-          type: "string"
-          format: "date-time"
-        container_project:
-          $ref: "#/definitions/InventoryObjectLazy"
-        container_node:
-          $ref: "#/definitions/InventoryObjectLazy"
-  ContainerNode:
-    allOf:
-    - $ref: "#/definitions/InventoryObject"
-    - type: "object"
-      required:
-      - "source_ref"
-      properties:
-        source_ref:
-          type: "string"
-        resource_version:
-          type: "string"
-        name:
-          type: "string"
-        cpus:
-          type: "integer"
-        memory:
-          type: "integer"
-        source_created_at:
-          type: "string"
-          format: "date-time"
-        source_deleted_at:
-          type: "string"
-          format: "date-time"
-        resource_timestamp:
-          type: "string"
-          format: "date-time"
-  ContainerProject:
-    allOf:
-    - $ref: "#/definitions/InventoryObject"
-    - type: "object"
-      required:
-      - "name"
-      - "source_ref"
-      properties:
-        source_ref:
-          type: "string"
-        name:
-          type: "string"
-        display_name:
-          type: "string"
-        resource_version:
-          type: "string"
-        source_created_at:
-          type: "string"
-          format: "date-time"
-        source_deleted_at:
-          type: "string"
-          format: "date-time"
-        resource_timestamp:
-          type: "string"
-          format: "date-time"
-  ContainerTemplate:
-    allOf:
-    - $ref: "#/definitions/InventoryObject"
-    - type: "object"
-      required:
-      - "source_ref"
-      properties:
-        source_ref:
-          type: "string"
-        name:
-          type: "string"
-        resource_version:
-          type: "string"
-        source_created_at:
-          type: "string"
-          format: "date-time"
-        source_deleted_at:
-          type: "string"
-          format: "date-time"
-        resource_timestamp:
-          type: "string"
-          format: "date-time"
-        container_project:
-          $ref: "#/definitions/InventoryObjectLazy"
+  Schema:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+    example:
+      name: "name"
   ServiceInstance:
     allOf:
     - $ref: "#/definitions/InventoryObject"
@@ -385,3 +369,19 @@ definitions:
           properties: {}
         service_offering:
           $ref: "#/definitions/InventoryObjectLazy"
+  Source:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Widget Adapter"
+    example:
+      name: "Widget Adapter"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
