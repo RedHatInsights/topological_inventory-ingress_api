@@ -16,7 +16,7 @@ module TopologicalInventory
         private
 
         def messaging_client
-          @messaging_client ||= ManageIQ::Messaging::Client.open(messaging_opts)
+          ManageIQ::Messaging::Client.open(messaging_opts)
         end
 
         def messaging_opts
