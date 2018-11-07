@@ -1,5 +1,5 @@
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+# This file is used by Rack-based servers to start the application.
 
-require "topological_inventory/ingress_api"
-run TopologicalInventory::IngressApi
+require_relative 'config/environment'
+
+run Rails.application

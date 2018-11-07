@@ -1,29 +1,33 @@
-# Swagger for Sinatra
+# Swagger for Rails 5
 
-## Overview
-This is a project to provide Swagger support inside the [Sinatra](http://www.sinatrarb.com/) framework.  You can find
-out more about both the spec and the framework at http://swagger.io.  For more information about 
-Wordnik's APIs, please visit http://developer.wordnik.com.
+[![Build Status](https://travis-ci.org/ManageIQ/topological_inventory-api.svg)](https://travis-ci.org/ManageIQ/topological_inventory-api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/maintainability)](https://codeclimate.com/github/ManageIQ/topological_inventory-api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/test_coverage)](https://codeclimate.com/github/ManageIQ/topological_inventory-api/test_coverage)
+
+This is a project to provide Swagger support inside the [Ruby on Rails](http://rubyonrails.org/) framework.
 
 ## Prerequisites
-You need to install ruby 1.9.3 and the following gems:
+You need to install ruby >= 2.2.2 and run:
 
 ```
-sinatra
-sinatra-cross_origin
+bundle install
 ```
 
 ## Getting started
+
 This sample was generated with the [swagger-codegen](https://github.com/swagger-api/swagger-codegen) project.
 
 ```
-rackup -p 4567 config.ru
+bin/rake db:create db:migrate
+bin/rails s
 ```
 
-In your [swagger ui](https://github.com/swagger-api/swagger-ui), put in the following URL:
+To list all your routes, use:
 
 ```
-http://localhost:4567/resources.json
+bin/rake routes
 ```
 
-Voila!
+## License
+
+This project is available as open source under the terms of the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
