@@ -79,6 +79,31 @@ securityDefinitions:
   UserSecurity:
     type: "basic"
 definitions:
+  Container:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "container_group"
+      - "name"
+      properties:
+        container_group:
+          $ref: "#/definitions/InventoryObjectLazy"
+        name:
+          type: "string"
+        cpu_limit:
+          type: "number"
+          format: "double"
+        cpu_request:
+          type: "number"
+          format: "double"
+        memory_limit:
+          type: "integer"
+        memory_request:
+          type: "integer"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
   ContainerGroup:
     allOf:
     - $ref: "#/definitions/InventoryObject"
@@ -320,6 +345,10 @@ definitions:
           $ref: "#/definitions/InventoryObjectLazy"
         service_parameters_set:
           $ref: "#/definitions/InventoryObjectLazy"
+        source_region:
+          $ref: "#/definitions/InventoryObjectLazy"
+        subscription:
+          $ref: "#/definitions/InventoryObjectLazy"
   ServiceOffering:
     allOf:
     - $ref: "#/definitions/InventoryObject"
@@ -342,6 +371,10 @@ definitions:
         resource_timestamp:
           type: "string"
           format: "date-time"
+        source_region:
+          $ref: "#/definitions/InventoryObjectLazy"
+        subscription:
+          $ref: "#/definitions/InventoryObjectLazy"
   ServicePlan:
     allOf:
     - $ref: "#/definitions/InventoryObject"
@@ -369,6 +402,10 @@ definitions:
           properties: {}
         service_offering:
           $ref: "#/definitions/InventoryObjectLazy"
+        source_region:
+          $ref: "#/definitions/InventoryObjectLazy"
+        subscription:
+          $ref: "#/definitions/InventoryObjectLazy"
   Source:
     type: "object"
     required:
@@ -385,3 +422,27 @@ definitions:
     example:
       name: "Widget Adapter"
       id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  SourceRegion:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        endpoint:
+          type: "string"
+  Subscription:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
