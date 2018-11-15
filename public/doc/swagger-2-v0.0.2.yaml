@@ -313,6 +313,28 @@ definitions:
         properties: {}
       transform_nested_lazy_finds:
         type: "boolean"
+  OrchestrationStack:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        source_created_at:
+          type: "string"
+          format: "date-time"
+        source_deleted_at:
+          type: "string"
+          format: "date-time"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
   Schema:
     type: "object"
     properties:
@@ -446,3 +468,38 @@ definitions:
           type: "string"
         name:
           type: "string"
+  Vm:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        uid_ems:
+          type: "string"
+        name:
+          type: "string"
+        hostname:
+          type: "string"
+        description:
+          type: "string"
+        power_state:
+          type: "string"
+        cpus:
+          type: "integer"
+        memory:
+          type: "integer"
+        extra:
+          type: "object"
+          properties: {}
+        source_created_at:
+          type: "string"
+          format: "date-time"
+        source_deleted_at:
+          type: "string"
+          format: "date-time"
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
