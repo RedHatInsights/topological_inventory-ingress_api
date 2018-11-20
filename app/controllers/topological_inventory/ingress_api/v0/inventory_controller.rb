@@ -7,7 +7,7 @@ module TopologicalInventory
           messaging_client.publish_message(
             :service => "topological_inventory-persister",
             :message => "save_inventory",
-            :payload => JSON.load(request.body.read),
+            :payload => JSON.parse(request.body.read),
           )
 
           {"message" => "yes, it worked"}.to_json
