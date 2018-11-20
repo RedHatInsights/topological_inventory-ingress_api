@@ -16,8 +16,8 @@ end
 class Swaggering < Sinatra::Base
   register Sinatra::CrossOrigin
 
-  @@routes = {}
-  @@configuration = Configuration.new
+  @routes = {}
+  @configuration = Configuration.new
 
   attr_accessor :configuration
 
@@ -25,141 +25,135 @@ class Swaggering < Sinatra::Base
     set    :server, "thin"
     enable :logging
 
-    get("/resources" + @@configuration.format_specifier) {
+    get("/resources" + @configuration.format_specifier) do
       cross_origin
       Swaggering.to_resource_listing
-    }
-
-    # for swagger.yaml
-    get("/swagger.yaml") {
-      cross_origin
-      File.read("./swagger.yaml");
-    }
-
-    @@configuration ||= Configuration.new
-    yield(@@configuration) if block_given?
-  end
-  
-  def self.add_route(method, path, swag={}, opts={}, &block)
-    #fullPath = swag["resourcePath"].to_s + @@configuration.format_specifier + path
-    fullPath = path.gsub(/{(.*?)}/, ':\1')
-    
-    accepted = case method.to_s.downcase
-      when 'get'
-        get(fullPath, opts, &block)
-        true
-      when 'post'
-        post(fullPath, opts, &block)
-        true
-      when 'delete'
-        delete(fullPath, opts, &block)
-        true
-      when 'put' 
-        put(fullPath, opts, &block)
-        true
-      else
-        puts "Error adding route: #{method} #{fullPath}"
-        false
     end
 
-    if accepted then
-      resourcePath = swag["resourcePath"].to_s
-      ops = @@routes[resourcePath]
-      if ops.nil?
-        ops = Array.new
-        @@routes.merge!(resourcePath => ops)
+    # for swagger.yaml
+    get("/swagger.yaml") do
+      cross_origin
+      File.read("./swagger.yaml")
+    end
 
-        get(resourcePath + @@configuration.format_specifier) do
+    @configuration ||= Configuration.new
+    yield(@configuration) if block_given?
+  end
+
+  def self.add_route(method, path, swag = {}, opts = {}, &block)
+    # full_path = swag["resourcePath"].to_s + @configuration.format_specifier + path
+    full_path = path.gsub(/{(.*?)}/, ':\1')
+
+    accepted =
+      case method.to_s.downcase
+      when 'get'
+        get(full_path, opts, &block)
+        true
+      when 'post'
+        post(full_path, opts, &block)
+        true
+      when 'delete'
+        delete(full_path, opts, &block)
+        true
+      when 'put'
+        put(full_path, opts, &block)
+        true
+      else
+        puts "Error adding route: #{method} #{full_path}"
+        false
+      end
+
+    if accepted
+      resource_path = swag["resourcePath"].to_s
+      ops = @routes[resource_path]
+      if ops.nil?
+        ops = []
+        @routes[resource_path] = ops
+
+        get(resource_path + @configuration.format_specifier) do
           cross_origin
-          Swaggering.to_api(resourcePath)
+          Swaggering.to_api(resource_path)
         end
       end
 
-      swag.merge!("httpMethod" => method.to_s.upcase)
+      swag["httpMethod"] = method.to_s.upcase
       ops.push(swag)
     end
   end
-  
+
   def self.to_resource_listing
-    apis = Array.new
-    (@@routes.keys).each do |key|
-      api = {
-        "path" => (key + ".{format}"),
+    apis = @routes.keys.collect do |key|
+      {
+        "path"        => "#{key}.{format}",
         "description" => "no description"
       }
-      apis.push api
     end
-  
-    resource = {
-      "apiVersion" => @@configuration.api_version,
-      "swaggerVersion" => @@configuration.swagger_version,
-      "apis" => apis
-    }
 
+    resource = {
+      "apiVersion"     => @configuration.api_version,
+      "swaggerVersion" => @configuration.swagger_version,
+      "apis"           => apis
+    }
     resource.to_json
   end
-  
-  def self.to_api(resourcePath)
-    apis = {}
+
+  def self.to_api(resource_path)
+    apis   = {}
     models = []
 
-    @@routes[resourcePath].each do |route|
-      endpoint = route["endpoint"].gsub(/:(\w+)(\/?)/,'{\1}\2')
-      path = (resourcePath + ".{format}" + endpoint)
+    @routes[resource_path].each do |route|
+      endpoint = route["endpoint"].gsub(/:(\w+)(\/?)/, '{\1}\2')
+      path = "#{resource_path}.{format}#{endpoint}"
       api = apis[path]
       if api.nil?
         api = {"path" => path, "description" => "description", "operations" => []}
-        apis.merge!(path => api)
+        apis[path] = api
       end
-      
+
       parameters = route["parameters"]
 
-      unless parameters.nil? then
-        parameters.each do |param|
-          av_string = param["allowableValues"]
-          unless av_string.nil?
-            if av_string.count('[') > 0
-              pattern = /^([A-Z]*)\[(.*)\]/
-              match = pattern.match av_string
-              case match.to_a[1]
-                when "LIST"
-                  allowables = match.to_a[2].split(',')
-                  param["allowableValues"] = {
-                    "valueType" => "LIST",
-                    "values" => allowables
-                  }
-                when "RANGE"
-                  allowables = match.to_a[2].split(',')
-                  param["allowableValues"] = {
-                    "valueType" => "RANGE",
-                    "min" => allowables[0],
-                    "max" => allowables[1]
-                  }
-              end                
-            end
+      parameters&.each do |param|
+        av_string = param["allowableValues"]
+        if av_string&.include?('[')
+          pattern = /^([A-Z]*)\[(.*)\]/
+          match = pattern.match(av_string)
+          case match[1]
+          when "LIST"
+            allowables = match[2].split(',')
+            param["allowableValues"] = {
+              "valueType" => "LIST",
+              "values"    => allowables
+            }
+          when "RANGE"
+            allowables = match[2].split(',')
+            param["allowableValues"] = {
+              "valueType" => "RANGE",
+              "min"       => allowables[0],
+              "max"       => allowables[1]
+            }
           end
         end
       end
-      
+
       op = {
-        "httpMethod" => route["httpMethod"],
-        "description" => route["summary"],
+        "httpMethod"    => route["httpMethod"],
+        "description"   => route["summary"],
         "responseClass" => route["responseClass"],
-        "notes" => route["notes"],
-        "nickname" => route["nickname"],
-        "summary" => route["summary"],
-        "parameters" => route["parameters"]
+        "notes"         => route["notes"],
+        "nickname"      => route["nickname"],
+        "summary"       => route["summary"],
+        "parameters"    => route["parameters"]
       }
       api["operations"].push(op)
     end
 
     api_listing = {
-      "apiVersion" => @@configuration.api_version,
-      "swaggerVersion" => @@configuration.swagger_version,
-      "basePath" => @@configuration.base_path,
-      "resourcePath" => resourcePath,
-      "apis" => apis.values,
-      "models" => models
+      "apiVersion"     => @configuration.api_version,
+      "swaggerVersion" => @configuration.swagger_version,
+      "basePath"       => @configuration.base_path,
+      "resourcePath"   => resource_path,
+      "apis"           => apis.values,
+      "models"         => models
     }
     api_listing.to_json
   end
