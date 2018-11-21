@@ -147,6 +147,8 @@ definitions:
           type: "integer"
         memory:
           type: "integer"
+        lives_on:
+          $ref: "#/definitions/InventoryObjectLazy"
         source_created_at:
           type: "string"
           format: "date-time"
