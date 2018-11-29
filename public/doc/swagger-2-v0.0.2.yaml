@@ -233,6 +233,23 @@ definitions:
           format: "date-time"
         container_project:
           $ref: "#/definitions/InventoryObjectLazy"
+  Flavor:
+    allOf:
+    - $ref: "#/definitions/InventoryObject"
+    - type: "object"
+      required:
+      - "source_ref"
+      properties:
+        source_ref:
+          type: "string"
+        name:
+          type: "string"
+        extra:
+          type: "object"
+          properties: {}
+        resource_timestamp:
+          type: "string"
+          format: "date-time"
   Inventory:
     type: "object"
     required:
@@ -245,6 +262,18 @@ definitions:
         $ref: "#/definitions/Schema"
       source:
         $ref: "#/definitions/Source"
+      refresh_state_uuid:
+        type: "string"
+        format: "uuid"
+      refresh_state_part_uuid:
+        type: "string"
+        format: "uuid"
+      total_parts:
+        type: "integer"
+      sweep_scope:
+        type: "array"
+        items:
+          type: "string"
       collections:
         type: "array"
         items:
@@ -279,10 +308,16 @@ definitions:
         manager_uuids:
         - "manager_uuids"
         - "manager_uuids"
+      total_parts: 0
       name: "name"
+      refresh_state_uuid: "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+      refresh_state_part_uuid: "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
       source:
         name: "Widget Adapter"
         id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      sweep_scope:
+      - "sweep_scope"
+      - "sweep_scope"
   InventoryCollection:
     type: "object"
     required:
@@ -531,3 +566,5 @@ definitions:
         resource_timestamp:
           type: "string"
           format: "date-time"
+        flavor:
+          $ref: "#/definitions/InventoryObjectLazy"
