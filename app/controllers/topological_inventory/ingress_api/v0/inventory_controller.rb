@@ -5,7 +5,7 @@ module TopologicalInventory
         skip_before_action :verify_authenticity_token
         def save_inventory
           messaging_client.publish_message(
-            :service => "topological_inventory-persister",
+            :service => "platform.topological-inventory.persister",
             :message => "save_inventory",
             :payload => JSON.parse(request.body.read),
           )
