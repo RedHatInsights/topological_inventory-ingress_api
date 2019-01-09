@@ -10,7 +10,7 @@
 /coverage/
 /db/schema.rb
 /doc/
-/log/
+/log/*.log
 /pkg/
 /spec/reports/
 /tmp/
