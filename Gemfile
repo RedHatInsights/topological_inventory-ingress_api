@@ -5,7 +5,7 @@ gem 'manageiq-loggers', '~> 0.1'
 gem 'pg',               '~> 1.0', :require => false
 gem 'puma',             '~> 3.0'
 gem 'rack-cors',        '>= 0.4.1'
-gem 'rails',            '~> 5.2.1.1'
+gem 'rails',            '~> 5.2.2'
 
 gem 'manageiq-messaging'
 gem 'topological_inventory-core', :git => 'https://github.com/ManageIQ/topological_inventory-core', :branch => 'master'
