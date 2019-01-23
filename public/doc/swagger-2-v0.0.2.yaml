@@ -367,6 +367,46 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/InventoryCollection'
+    example:
+      schema:
+        name: name
+      collections:
+      - data:
+        - {}
+        - {}
+        name: name
+        all_manager_uuids:
+        - all_manager_uuids
+        - all_manager_uuids
+        partial_data:
+        - null
+        - null
+        manager_uuids:
+        - manager_uuids
+        - manager_uuids
+      - data:
+        - {}
+        - {}
+        name: name
+        all_manager_uuids:
+        - all_manager_uuids
+        - all_manager_uuids
+        partial_data:
+        - null
+        - null
+        manager_uuids:
+        - manager_uuids
+        - manager_uuids
+      total_parts: 0
+      name: name
+      refresh_state_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      refresh_state_part_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      source:
+        name: Widget Adapter
+        id: d290f1ee-6c54-4b01-90e6-d701748f0851
+      sweep_scope:
+      - sweep_scope
+      - sweep_scope
   InventoryCollection:
     type: object
     required:
@@ -390,6 +430,20 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/InventoryObject'
+    example:
+      data:
+      - {}
+      - {}
+      name: name
+      all_manager_uuids:
+      - all_manager_uuids
+      - all_manager_uuids
+      partial_data:
+      - null
+      - null
+      manager_uuids:
+      - manager_uuids
+      - manager_uuids
   InventoryObject:
     type: object
   InventoryObjectLazy:
