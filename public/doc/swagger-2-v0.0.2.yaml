@@ -515,7 +515,7 @@ definitions:
           format: date-time
         service_offering:
           $ref: '#/definitions/InventoryObjectLazy'
-        service_parameters_set:
+        service_plan:
           $ref: '#/definitions/InventoryObjectLazy'
         source_region:
           $ref: '#/definitions/InventoryObjectLazy'
