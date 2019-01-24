@@ -29,6 +29,61 @@ To list all your routes, use:
 bin/rake routes
 ```
 
+## Generate client to any language on any OS using openapi_generator
+
+Follow https://github.com/OpenAPITools/openapi-generator instructions
+using the yaml file e.g. `public/doc/swagger-2-v0.0.2.yaml`
+
+## Quick setup for ruby client generated on Fedora/RHEL:
+Install java 8:
+
+``` 
+ yum search java | grep openjdk
+ yum install java-1.8.0-openjdk-headless.x86_64
+ yum install java-1.8.0-openjdk-devel.x86_64
+```
+
+Install maven:
+
+``` 
+ # Download maven bin tar from http://maven.apache.org/download.cgi
+ sudo tar xzf apache-maven-3.6.0-bin.tar.gz /opt/apache-maven-3.6.0
+ sudo ln -s /opt/apache-maven-3.6.0 /opt/maven
+ 
+ sudo vi /etc/profile.d/maven.sh
+ # and add:
+ export M2_HOME=/opt/maven
+ export PATH=${M2_HOME}/bin:${PATH}
+ 
+ # then
+ source /etc/profile.d/maven.sh
+```
+
+Get the openapi-generator:
+
+```
+ git clone https://github.com/openapitools/openapi-generator
+ cd openapi-generator
+ mvn clean package
+ cd ..
+```
+
+Fetch the ruby client git repo:
+ 
+```
+git clone git@github.com:ManageIQ/topological_inventory-ingress_api-client-ruby.git
+```
+
+Build the client:
+
+```
+ cd topological_inventory-ingress-api
+ ./generate_ruby_client.sh
+ 
+ cd ../topological_inventory-ingress_api-client-ruby
+ # and commit&push the client changes
+```
+
 ## License
 
 This project is available as open source under the terms of the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
