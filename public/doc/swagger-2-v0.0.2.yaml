@@ -129,6 +129,8 @@ definitions:
         resource_timestamp:
           type: string
           format: date-time
+        ipaddress:
+          type: string
         container_project:
           $ref: '#/definitions/InventoryObjectLazy'
         container_node:
@@ -596,6 +598,8 @@ definitions:
         name:
           type: string
         description:
+          type: string
+        resource_version:
           type: string
         source_created_at:
           type: string
