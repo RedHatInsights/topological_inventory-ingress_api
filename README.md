@@ -34,38 +34,14 @@ bin/rake routes
 Follow https://github.com/OpenAPITools/openapi-generator instructions
 using the yaml file e.g. `public/doc/swagger-2-v0.0.2.yaml`
 
+## Prerequisities
+- Java Runtime Environment (JRE) 8
+
 ## Quick setup for ruby client generated on Fedora/RHEL:
-Install java 8:
-
-``` 
- yum search java | grep openjdk
- yum install java-1.8.0-openjdk-headless.x86_64
- yum install java-1.8.0-openjdk-devel.x86_64
 ```
-
-Install maven:
-
-``` 
- # Download maven bin tar from http://maven.apache.org/download.cgi
- sudo tar xzf apache-maven-3.6.0-bin.tar.gz /opt/apache-maven-3.6.0
- sudo ln -s /opt/apache-maven-3.6.0 /opt/maven
- 
- sudo vi /etc/profile.d/maven.sh
- # and add:
- export M2_HOME=/opt/maven
- export PATH=${M2_HOME}/bin:${PATH}
- 
- # then
- source /etc/profile.d/maven.sh
-```
-
-Get the openapi-generator:
-
-```
- git clone https://github.com/openapitools/openapi-generator
- cd openapi-generator
- mvn clean package
- cd ..
+# Download JAR of latest stable openapi-generator
+cd topological_inventory-ingress-api
+wget http://central.maven.org/maven2/org/openapitools/openapi-generator-cli/3.3.4/openapi-generator-cli-3.3.4.jar -O public/doc/openapi-generator-cli.jar
 ```
 
 Fetch the ruby client git repo:
