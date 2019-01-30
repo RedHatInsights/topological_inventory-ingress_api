@@ -15,3 +15,4 @@
 /spec/reports/
 /tmp/
 /v2_key
+/public/doc/*.jar
