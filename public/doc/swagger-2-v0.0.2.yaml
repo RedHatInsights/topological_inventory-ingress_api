@@ -688,6 +688,17 @@ definitions:
           type: integer
         memory:
           type: integer
+        mac_addresses:
+          type: array
+          items:
+            type: string
+          example: ["06:d5:e7:4e:c8:92", "06:d5:e7:4e:c8:93"]
+          description: Array of all MAC addresses of this Vm
+        host_inventory_uuid:
+          type: string
+          format: uuid
+          example: "82729f49-ed4e-4fc6-9ca1-b0ffee063874"
+          description: UUID of the host in host inventory
         extra:
           type: object
           properties: {}
