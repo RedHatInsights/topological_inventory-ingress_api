@@ -147,8 +147,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   ContainerImage:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -185,8 +183,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   ContainerNode:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -227,8 +223,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   ContainerProject:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -266,8 +260,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   ContainerTemplate:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -304,8 +296,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   Flavor:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -584,8 +574,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   ServicePlan:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -665,6 +653,8 @@ definitions:
       properties:
         name:
           type: string
+        value:
+          type: string
   Vm:
     allOf:
     - $ref: '#/definitions/InventoryObject'
@@ -725,8 +715,6 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
-        value:
-          type: string
   Volume:
     allOf:
     - $ref: '#/definitions/InventoryObject'
