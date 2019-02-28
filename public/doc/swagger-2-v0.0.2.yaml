@@ -546,6 +546,9 @@ definitions:
           type: string
         support_url:
           type: string
+        extra:
+          type: object
+          properties: {}
         source_created_at:
           type: string
           format: date-time
@@ -605,6 +608,9 @@ definitions:
           type: string
           format: date-time
         source_deleted_at:
+          type: string
+          format: date-time
+        resource_timestamp:
           type: string
           format: date-time
         create_json_schema:
