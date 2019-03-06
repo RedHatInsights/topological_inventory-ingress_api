@@ -28,11 +28,14 @@ RUN source /opt/rh/rh-postgresql10/enable && \
     rm -rvf /root/.bundle/cache
 
 COPY . $WORKDIR
-COPY docker-assets/entrypoint /usr/bin
 
 RUN chgrp -R 0 $WORKDIR && \
     chmod -R g=u $WORKDIR
 
 EXPOSE 3000
 
-ENTRYPOINT ["entrypoint"]
+ENV RAILS_ENV production
+# Set a value even if we don't use it so active record doesn't blow up
+ENV DATABASE_URL postgresql://localhost:5432/postgres
+
+ENTRYPOINT ["bundle", "exec", "rails", "server"]
