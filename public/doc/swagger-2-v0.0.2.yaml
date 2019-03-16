@@ -200,6 +200,21 @@ definitions:
           type: integer
         memory:
           type: integer
+        pods:
+          tyoe: integer
+        allocatable_cpus:
+          type: number
+          format: float
+        allocatable_memory:
+          type: integer
+        allocatable_pods:
+          type: integer
+        conditions:
+          type: object
+        addresses:
+          type: object
+        node_info:
+          type: object
         lives_on:
           $ref: '#/definitions/InventoryObjectLazy'
         source_created_at:
@@ -245,6 +260,8 @@ definitions:
         source_deleted_at:
           type: string
           format: date-time
+        status_phase:
+          type: string
         resource_timestamp:
           type: string
           format: date-time
@@ -260,6 +277,34 @@ definitions:
           $ref: '#/definitions/InventoryObjectLazy'
         tag:
           $ref: '#/definitions/InventoryObjectLazy'
+  ContainerResourceQuota:
+    allOf:
+      - $ref: '#/definitions/InventoryObject'
+      - type: object
+        required:
+          - source_ref
+        properties:
+          source_ref:
+            type: string
+          name:
+            type: string
+          resource_version:
+            type: string
+          source_created_at:
+            type: string
+            format: date-time
+          source_deleted_at:
+            type: string
+            format: date-time
+          status:
+            type: object
+          spec:
+            type: object
+          resource_timestamp:
+            type: string
+            format: date-time
+          container_project:
+            $ref: '#/definitions/InventoryObjectLazy'
   ContainerTemplate:
     allOf:
     - $ref: '#/definitions/InventoryObject'
