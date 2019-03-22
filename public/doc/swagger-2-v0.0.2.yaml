@@ -541,6 +541,9 @@ definitions:
           type: string
         name:
           type: string
+        external_url:
+          type: string
+          description: URL of the service instance in the external source (OpenShift, Azure, AWS, ...).
         source_created_at:
           type: string
           format: date-time
