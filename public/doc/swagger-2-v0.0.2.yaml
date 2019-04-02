@@ -397,9 +397,7 @@ definitions:
       total_parts:
         type: integer
       sweep_scope:
-        type: array
-        items:
-          type: string
+        type: object
       collections:
         type: array
         items:
