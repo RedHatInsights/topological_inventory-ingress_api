@@ -10,7 +10,21 @@ module TopologicalInventory
             :payload => JSON.parse(request.body.read),
           )
 
-          {"message" => "yes, it worked"}.to_json
+          render status: 200, :json => {
+            :message => "ok",
+          }.to_json
+        rescue Kafka::MessageSizeTooLarge => e
+          render :status => 500, :json => {
+            :message    => e.message,
+            :error_code => e.class.to_s,
+          }.to_json
+        rescue => e
+          render :status => 500, :json => {
+            :message    => e.message,
+            :error_code => e.class.to_s,
+          }.to_json
+
+          raise e
         end
 
         private
