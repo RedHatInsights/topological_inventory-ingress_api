@@ -1,7 +1,7 @@
 module TopologicalInventory
   module IngressApi
     def self.with_messaging_client
-      messaging_client ||= raw_messaging_client
+      messaging_client ||= new_messaging_client
       raise if messaging_client.nil?
 
       begin
@@ -26,7 +26,7 @@ module TopologicalInventory
       Thread.current[:messaging_client] = value
     end
 
-    private_class_method def self.raw_messaging_client
+    private_class_method def self.new_messaging_client
       ManageIQ::Messaging::Client.open(
         :encoding => "json",
         :host     => ENV["QUEUE_HOST"] || "localhost",
