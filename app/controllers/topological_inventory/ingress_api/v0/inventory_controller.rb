@@ -20,6 +20,8 @@ module TopologicalInventory
             :message    => e.message,
             :error_code => e.class.to_s,
           }.to_json
+
+          raise e
         end
 
         private
