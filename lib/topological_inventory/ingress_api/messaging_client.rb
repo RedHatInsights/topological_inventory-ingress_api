@@ -26,13 +26,19 @@ module TopologicalInventory
       Thread.current[:messaging_client] = value
     end
 
-    private_class_method def self.new_messaging_client
-      ManageIQ::Messaging::Client.open(
-        :encoding => "json",
-        :host     => ENV["QUEUE_HOST"] || "localhost",
-        :port     => ENV["QUEUE_PORT"] || "9092",
-        :protocol => :Kafka,
-      )
+    private_class_method def self.new_messaging_client(retry_max = 1)
+      retry_count = 0
+      begin
+        ManageIQ::Messaging::Client.open(
+          :encoding => "json",
+          :host     => ENV["QUEUE_HOST"] || "localhost",
+          :port     => ENV["QUEUE_PORT"] || "9092",
+          :protocol => :Kafka,
+        )
+      end
+    rescue Kafka::ConnectionError
+      retry_count += 1
+      retry unless retry_count > retry_max
     end
   end
 end

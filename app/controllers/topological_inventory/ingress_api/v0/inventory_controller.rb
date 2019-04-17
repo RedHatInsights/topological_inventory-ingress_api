@@ -8,8 +8,16 @@ module TopologicalInventory
         def save_inventory
           payload = JSON.parse(request.body.read)
 
+          retry_count = 0
+          retry_max   = 1
+
           TopologicalInventory::IngressApi.with_messaging_client do |client|
-            client.publish_message(save_inventory_payload(payload))
+            begin
+              client.publish_message(save_inventory_payload(payload))
+            rescue Kafka::DeliveryFailed
+              retry_count += 1
+              retry unless retry_count > retry_max
+            end
           end
 
           render status: 200, :json => {
