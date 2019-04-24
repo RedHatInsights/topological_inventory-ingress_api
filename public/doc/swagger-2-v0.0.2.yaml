@@ -702,10 +702,13 @@ definitions:
     - type: object
       required:
       - name
+      - namespace
       properties:
         name:
           type: string
         value:
+          type: string
+        namespace:
           type: string
   Vm:
     allOf:
