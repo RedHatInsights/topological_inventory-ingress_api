@@ -12,10 +12,28 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost",
-  "basePath": "/topological_inventory/ingress_api/0.0.2",
-  "schemes": [
-    "http"
+  "servers": [
+    {
+      "url": "https://cloud.redhat.com/{basePath}",
+      "description": "Production Server",
+      "variables": {
+        "basePath": {
+          "default": "/topological_inventory/ingress_api/0.0.2"
+        }
+      }
+    },
+    {
+      "url": "http://localhost:{port}/{basePath}",
+      "description": "Development Server",
+      "variables": {
+        "port": {
+          "default": "9292"
+        },
+        "basePath": {
+          "default": "/topological_inventory/ingress_api/0.0.2"
+        }
+      }
+    }
   ],
   "security": [
     {
