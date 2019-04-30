@@ -38,10 +38,51 @@
   "security": [
     {
       "UserSecurity": [
+
       ]
     }
   ],
   "paths": {
+    "/inventory": {
+      "post": {
+        "summary": "save inventory",
+        "description": "Submits a payload to be persisted to the database",
+        "operationId": "saveInventory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Inventory"
+              }
+            }
+          },
+          "description": "Inventory payload",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ContainerGroups collection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "inventory saved"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ContainerGroups collection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "invalid input, inventory invalid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/openapi.json": {
       "get": {
         "summary": "Return this API document in JSON format",
@@ -52,95 +93,6 @@
           }
         }
       }
-    },
-    "/inventory": {
-      "post": {
-        "summary": "save inventory",
-        "description": "Submits a payload to be persisted to the database",
-        "operationId": "saveInventory",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "inventory",
-            "description": "Inventory payload",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/Inventory"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "inventory saved"
-          },
-          "400": {
-            "description": "invalid input, inventory invalid"
-          }
-        }
-      }
-    },
-    "/schemas": {
-      "get": {
-        "summary": "searches schemas",
-        "description": "By passing in the appropriate options, you can search for\navailable inventory schemas in the system\n",
-        "operationId": "searchSchemas",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "searchString",
-            "in": "query",
-            "description": "pass an optional search string for looking up schemas",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "number of records to skip for pagination",
-            "required": false,
-            "type": "integer",
-            "minimum": 0,
-            "format": "int32"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "maximum number of records to return",
-            "required": false,
-            "type": "integer",
-            "maximum": 50,
-            "minimum": 0,
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "search results matching criteria",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Schema"
-              }
-            }
-          },
-          "400": {
-            "description": "bad input parameter"
-          }
-        }
-      }
-    }
-  },
-  "securityDefinitions": {
-    "UserSecurity": {
-      "type": "basic"
     }
   },
   "components": {
@@ -343,7 +295,7 @@
                 "type": "integer"
               },
               "pods": {
-                "tyoe": "integer"
+                "type": "integer"
               },
               "allocatable_cpus": {
                 "type": "number",
@@ -1382,6 +1334,8 @@
           }
         ]
       }
+    },
+    "parameters": {
     }
   }
 }
