@@ -43,6 +43,17 @@
     }
   ],
   "paths": {
+    "/openapi.json": {
+      "get": {
+        "summary": "Return this API document in JSON format",
+        "operationId": "getDocumentation",
+        "responses": {
+          "200": {
+            "description": "The API document for this version of the API"
+          }
+        }
+      }
+    },
     "/inventory": {
       "post": {
         "summary": "save inventory",
