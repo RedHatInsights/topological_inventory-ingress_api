@@ -1,7 +1,11 @@
 module TopologicalInventory
   module IngressApi
     module V0x0x2
-      class SchemasController < IngressApi::V0::SchemasController; end
+      class RootController < ApplicationController
+        def openapi
+          render :json => TopologicalInventory::IngressApi::Docs["0.0"].content.to_json
+        end
+      end
       class InventoryController < IngressApi::V0::InventoryController; end
     end
   end
