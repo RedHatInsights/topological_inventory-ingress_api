@@ -31,6 +31,13 @@ RSpec.describe("v0.0.2 - Inventory") do
     end
 
     context "validate post" do
+      before :each do
+        client = double
+        allow(client).to receive(:publish_message)
+
+        allow(TopologicalInventory::IngressApi).to receive(:with_messaging_client).and_yield(client)
+      end
+
       let(:headers) do
         {"Content-Type" => "application/json"}
       end
