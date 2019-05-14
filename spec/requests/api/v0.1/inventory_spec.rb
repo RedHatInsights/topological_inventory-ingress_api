@@ -223,22 +223,22 @@ RSpec.describe("v0.0.2 - Inventory") do
 
       let(:failed_validation_code) { "400" }
 
-      context "correct payloads" do
-        it "passes valid body" do
+      context "correct payload" do
+        it "passes with valid container groups" do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq("200")
           expect(JSON.parse(@response.body)).to eq({"message" => "ok"})
         end
 
-        it "passes valid body" do
+        it "passes with valid container nodes" do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
           expect(@response.code).to eq("200")
           expect(JSON.parse(@response.body)).to eq({"message" => "ok"})
         end
 
-        it "passes valid body" do
+        it "passes with valid container groups and nodes" do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_and_group_body), :headers => headers)
 
           expect(@response.code).to eq("200")
@@ -282,29 +282,47 @@ RSpec.describe("v0.0.2 - Inventory") do
         end
 
         it "fails because we pass integer instead of float" do
-          container_group_data["allocatable_cpus"] = 10
+          container_node_data_1["allocatable_cpus"] = 10
 
-          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
+          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
           pending("Integer is casted to float automatically, do we want strict check?")
           expect(@response.code).to eq(failed_validation_code)
         end
 
         it "fails because we pass string instead of float" do
-          container_group_data["allocatable_cpus"] = "10.6"
+          container_node_data_1["allocatable_cpus"] = "10.6"
 
-          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
+          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
           pending("Integer is casted to float automatically, do we want strict check?")
           expect(@response.code).to eq(failed_validation_code)
         end
 
         it "fails because we pass bad string instead of float" do
-          container_group_data["allocatable_cpus"] = "10cows and 6cowboys"
+          container_node_data_1["allocatable_cpus"] = "10cows and 6cowboys"
 
-          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
+          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
           pending("Invalid string is casted to float automatically, do we want strict check?")
+          expect(@response.code).to eq(failed_validation_code)
+        end
+
+        it "fails when passing array into type object" do
+          container_node_data_1["node_info"] = ["42", "45"]
+
+          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
+
+          pending("Object should be hash, right? For some reason this is passing.")
+          expect(@response.code).to eq(failed_validation_code)
+        end
+
+        it "fails when passing hash into type array" do
+          container_node_data_1["conditions"] = {"a" => "b"}
+
+          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
+
+          pending("We should check array type")
           expect(@response.code).to eq(failed_validation_code)
         end
       end
