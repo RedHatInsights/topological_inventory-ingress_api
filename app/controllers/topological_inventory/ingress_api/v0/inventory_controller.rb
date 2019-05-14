@@ -9,7 +9,7 @@ module TopologicalInventory
         def save_inventory
           payload = JSON.parse(request.body.read)
 
-          root = OpenAPIParser.parse(JSON.parse(File.read('public/doc/openapi-3-v0.0.2.json')),
+          root = OpenAPIParser.parse(TopologicalInventory::IngressApi::Docs["0.0"].content,
                                      {coerce_value: true, datetime_coerce_class: DateTime})
 
           request_operation = root.request_operation(:post, '/inventory')
