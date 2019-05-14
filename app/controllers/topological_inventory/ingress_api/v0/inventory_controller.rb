@@ -5,8 +5,16 @@ module TopologicalInventory
     module V0
       class InventoryController < ApplicationController
         skip_before_action :verify_authenticity_token
+
         def save_inventory
           payload = JSON.parse(request.body.read)
+
+          root = OpenAPIParser.parse(JSON.parse(File.read('public/doc/openapi-3-v0.0.2.json')),
+                                     {coerce_value: true, datetime_coerce_class: DateTime})
+
+          request_operation = root.request_operation(:post, '/inventory')
+
+          request_operation.validate_request_body('application/json', payload)
 
           retry_count = 0
           retry_max   = 1
@@ -22,6 +30,11 @@ module TopologicalInventory
 
           render status: 200, :json => {
             :message => "ok",
+          }.to_json
+        rescue OpenAPIParser::OpenAPIError => e
+          render :status => 400, :json => {
+            :message    => e.message,
+            :error_code => e.class.to_s,
           }.to_json
         rescue => e
           render :status => 500, :json => {
