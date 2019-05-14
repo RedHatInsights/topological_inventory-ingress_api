@@ -31,7 +31,7 @@ RSpec.describe("v0.0.2 - Inventory") do
     end
 
     context "validate post" do
-      before :each do
+      before do
         client = double
         allow(client).to receive(:publish_message)
 
