@@ -109,32 +109,47 @@
               "name"
             ],
             "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
               "container_group": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/ContainerGroupReference"
               },
               "container_image": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerImageReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "cpu_limit": {
+                "format": "double",
+                "nullable": true,
+                "type": "number"
+              },
+              "cpu_request": {
+                "format": "double",
+                "nullable": true,
+                "type": "number"
+              },
+              "memory_limit": {
+                "nullable": true,
+                "type": "integer"
+              },
+              "memory_request": {
+                "nullable": true,
+                "type": "integer"
               },
               "name": {
                 "type": "string"
               },
-              "cpu_limit": {
-                "type": "number",
-                "format": "double"
-              },
-              "cpu_request": {
-                "type": "number",
-                "format": "double"
-              },
-              "memory_limit": {
-                "type": "integer"
-              },
-              "memory_request": {
-                "type": "integer"
-              },
               "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               }
             }
           }
@@ -151,39 +166,103 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "container_node": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerNodeReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerNodeReferenceByName"
+                      }
+                    ]
+                  }
+                ],
+                "nullable": true
+              },
+              "container_project": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
+                  }
+                ],
+                "nullable": true
+              },
+              "ipaddress": {
+                "nullable": true,
                 "type": "string"
               },
               "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "resource_version": {
+                "nullable": true,
                 "type": "string"
               },
               "source_created_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "ipaddress": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
-              "container_project": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "container_node": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+              "source_ref": {
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "ContainerGroupReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_groups$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "ContainerGroupTag": {
         "allOf": [
@@ -198,10 +277,10 @@
             ],
             "properties": {
               "container_group": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/ContainerGroupReference"
               },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
               }
             }
           }
@@ -218,33 +297,73 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "name": {
+                "nullable": true,
                 "type": "string"
               },
-              "tag": {
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "resource_version": {
+                "nullable": true,
                 "type": "string"
               },
               "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+              "source_ref": {
+                "type": "string"
+              },
+              "tag": {
+                "nullable": true,
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "ContainerImageReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_images$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "ContainerImageTag": {
         "allOf": [
@@ -259,10 +378,10 @@
             ],
             "properties": {
               "container_image": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/ContainerImageReference"
               },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
               }
             }
           }
@@ -279,61 +398,144 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "resource_version": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "cpus": {
-                "type": "integer"
-              },
-              "memory": {
-                "type": "integer"
-              },
-              "pods": {
-                "type": "integer"
+              "addresses": {
+                "nullable": true,
+                "type": "object"
               },
               "allocatable_cpus": {
-                "type": "number",
-                "format": "float"
+                "format": "float",
+                "nullable": true,
+                "type": "number"
               },
               "allocatable_memory": {
+                "nullable": true,
                 "type": "integer"
               },
               "allocatable_pods": {
+                "nullable": true,
                 "type": "integer"
               },
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
               "conditions": {
+                "nullable": true,
                 "type": "object"
               },
-              "addresses": {
-                "type": "object"
-              },
-              "node_info": {
-                "type": "object"
+              "cpus": {
+                "nullable": true,
+                "type": "integer"
               },
               "lives_on": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CrossLinkVmReference"
+                  }
+                ],
+                "nullable": true
               },
-              "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+              "memory": {
+                "nullable": true,
+                "type": "integer"
               },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "node_info": {
+                "nullable": true,
+                "type": "object"
+              },
+              "pods": {
+                "nullable": true,
+                "type": "integer"
               },
               "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_version": {
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "ContainerNodeReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_nodes$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
+      },
+      "ContainerNodeReferenceByName": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_nodes$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^by_name$"
+          }
+        }
       },
       "ContainerNodeTag": {
         "allOf": [
@@ -348,10 +550,17 @@
             ],
             "properties": {
               "container_node": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerNodeReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContainerNodeReferenceByName"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
               }
             }
           }
@@ -365,40 +574,110 @@
           {
             "type": "object",
             "required": [
-              "name",
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "display_name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_version": {
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "status_phase": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ContainerProjectReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_projects$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
               "source_ref"
             ],
             "properties": {
               "source_ref": {
                 "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "display_name": {
-                "type": "string"
-              },
-              "resource_version": {
-                "type": "string"
-              },
-              "source_created_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "status_phase": {
-                "type": "string"
-              },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
               }
             }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
           }
-        ]
+        }
+      },
+      "ContainerProjectReferenceByName": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_projects$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^by_name$"
+          }
+        }
       },
       "ContainerProjectTag": {
         "allOf": [
@@ -413,10 +692,17 @@
             ],
             "properties": {
               "container_project": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerProjectReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
               }
             }
           }
@@ -433,35 +719,59 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
+              "container_project": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
+                  }
+                ],
+                "nullable": true
+              },
               "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "resource_version": {
+                "nullable": true,
                 "type": "string"
               },
               "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "status": {
-                "type": "object"
+              "source_ref": {
+                "type": "string"
               },
               "spec": {
+                "nullable": true,
                 "type": "object"
               },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "container_project": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+              "status": {
+                "nullable": true,
+                "type": "object"
               }
             }
           }
@@ -478,33 +788,84 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
+              "container_project": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
+                  }
+                ],
+                "nullable": true
+              },
               "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "resource_version": {
+                "nullable": true,
                 "type": "string"
               },
               "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "container_project": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+              "source_ref": {
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "ContainerTemplateReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^container_templates$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "ContainerTemplateTag": {
         "allOf": [
@@ -519,14 +880,44 @@
             ],
             "properties": {
               "container_template": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/ContainerTemplateReference"
               },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
               }
             }
           }
         ]
+      },
+      "CrossLinkVmReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^cross_link_vms$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "uid_ems"
+            ],
+            "properties": {
+              "uid_ems": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "Flavor": {
         "allOf": [
@@ -539,44 +930,84 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string",
-                "description": "Unique identifier of the entity."
-              },
-              "name": {
-                "type": "string",
-                "description": "Name of the flavor."
-              },
-              "disk_size": {
-                "type": "integer",
-                "description": "Size of one local disk in bytes. Total storage capacity of the entity is: disk_size * disk_count."
-              },
-              "disk_count": {
-                "type": "integer",
-                "description": "Total count of disks. Total storage capacity of the entity is: disk_size * disk_count."
-              },
-              "memory": {
-                "type": "integer",
-                "description": "Memory in bytes."
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "cpus": {
-                "type": "integer",
-                "description": "Number of cpus of the entity (vcpus for virtualized, cpus for baremetal)."
+                "description": "Number of cpus of the entity (vcpus for virtualized, cpus for baremetal).",
+                "nullable": true,
+                "type": "integer"
+              },
+              "disk_count": {
+                "description": "Total count of disks. Total storage capacity of the entity is: disk_size * disk_count.",
+                "nullable": true,
+                "type": "integer"
+              },
+              "disk_size": {
+                "description": "Size of one local disk in bytes. Total storage capacity of the entity is: disk_size * disk_count.",
+                "nullable": true,
+                "type": "integer"
               },
               "extra": {
-                "type": "object",
                 "description": "Free form document for storing SourceType's specific attributes.",
-                "properties": {
-                }
+                "nullable": true,
+                "type": "object"
+              },
+              "memory": {
+                "description": "Memory in bytes.",
+                "nullable": true,
+                "type": "integer"
+              },
+              "name": {
+                "description": "Name of the flavor.",
+                "nullable": true,
+                "type": "string"
               },
               "resource_timestamp": {
-                "type": "string",
+                "description": "Timestamp marking age of the data.",
                 "format": "date-time",
-                "description": "Timestamp marking age of the data."
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "description": "Unique identifier of the entity.",
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "FlavorReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^flavors$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "description": "Unique identifier of the entity.",
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "Inventory": {
         "type": "object",
@@ -592,7 +1023,7 @@
             "$ref": "#/components/schemas/Schema"
           },
           "source": {
-            "$ref": "#/components/schemas/Source"
+            "type": "string"
           },
           "refresh_state_uuid": {
             "type": "string",
@@ -606,75 +1037,135 @@
             "type": "integer"
           },
           "sweep_scope": {
-            "type": "object"
+            "oneOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "array"
+              }
+            ]
           },
           "collections": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InventoryCollection"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainer"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerGroup"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerImage"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerNode"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerProject"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerResourceQuota"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerTemplate"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionFlavor"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionOrchestrationStack"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceInstance"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceOfferingIcon"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceOffering"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServicePlan"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionSourceRegion"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionSubscription"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionVm"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionVolume"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionVolumeType"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerGroupTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerImageTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerNodeTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerProjectTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionContainerTemplateTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceOfferingTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionVmTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionVolumeAttachment"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "name",
+                "mapping": {
+                  "containers": "#/components/schemas/InventoryCollectionContainer",
+                  "container_groups": "#/components/schemas/InventoryCollectionContainerGroup",
+                  "container_images": "#/components/schemas/InventoryCollectionContainerImage",
+                  "container_nodes": "#/components/schemas/InventoryCollectionContainerNode",
+                  "container_projects": "#/components/schemas/InventoryCollectionContainerProject",
+                  "container_resource_quotas": "#/components/schemas/InventoryCollectionContainerResourceQuota",
+                  "container_templates": "#/components/schemas/InventoryCollectionContainerTemplate",
+                  "flavors": "#/components/schemas/InventoryCollectionFlavor",
+                  "orchestration_stacks": "#/components/schemas/InventoryCollectionOrchestrationStack",
+                  "service_instances": "#/components/schemas/InventoryCollectionServiceInstance",
+                  "service_offering_icons": "#/components/schemas/InventoryCollectionServiceOfferingIcon",
+                  "service_offerings": "#/components/schemas/InventoryCollectionServiceOffering",
+                  "service_plans": "#/components/schemas/InventoryCollectionServicePlan",
+                  "source_regions": "#/components/schemas/InventoryCollectionSourceRegion",
+                  "subscriptions": "#/components/schemas/InventoryCollectionSubscription",
+                  "vms": "#/components/schemas/InventoryCollectionVm",
+                  "volumes": "#/components/schemas/InventoryCollectionVolume",
+                  "volume_types": "#/components/schemas/InventoryCollectionVolumeType",
+                  "container_group_tags": "#/components/schemas/InventoryCollectionContainerGroupTag",
+                  "container_image_tags": "#/components/schemas/InventoryCollectionContainerImageTag",
+                  "container_node_tags": "#/components/schemas/InventoryCollectionContainerNodeTag",
+                  "container_project_tags": "#/components/schemas/InventoryCollectionContainerProjectTag",
+                  "container_template_tags": "#/components/schemas/InventoryCollectionContainerTemplateTag",
+                  "service_offering_tags": "#/components/schemas/InventoryCollectionServiceOfferingTag",
+                  "vm_tags": "#/components/schemas/InventoryCollectionVmTag",
+                  "tags": "#/components/schemas/InventoryCollectionTag",
+                  "volume_attachments": "#/components/schemas/InventoryCollectionVolumeAttachment"
+                }
+              }
             }
           }
-        },
-        "example": {
-          "schema": {
-            "name": "name"
-          },
-          "collections": [
-            {
-              "data": [
-                {
-                },
-                {
-                }
-              ],
-              "name": "name",
-              "all_manager_uuids": [
-                "all_manager_uuids",
-                "all_manager_uuids"
-              ],
-              "partial_data": [
-                null,
-                null
-              ],
-              "manager_uuids": [
-                "manager_uuids",
-                "manager_uuids"
-              ]
-            },
-            {
-              "data": [
-                {
-                },
-                {
-                }
-              ],
-              "name": "name",
-              "all_manager_uuids": [
-                "all_manager_uuids",
-                "all_manager_uuids"
-              ],
-              "partial_data": [
-                null,
-                null
-              ],
-              "manager_uuids": [
-                "manager_uuids",
-                "manager_uuids"
-              ]
-            }
-          ],
-          "total_parts": 0,
-          "name": "name",
-          "refresh_state_uuid": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "refresh_state_part_uuid": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "source": {
-            "name": "Widget Adapter",
-            "id": "d290f1ee-6c54-4b01-90e6-d701748f0851"
-          },
-          "sweep_scope": [
-            "sweep_scope",
-            "sweep_scope"
-          ]
         }
       },
       "InventoryCollection": {
@@ -685,18 +1176,6 @@
         "properties": {
           "name": {
             "type": "string"
-          },
-          "manager_uuids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "all_manager_uuids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "data": {
             "type": "array",
@@ -710,27 +1189,627 @@
               "$ref": "#/components/schemas/InventoryObject"
             }
           }
-        },
-        "example": {
-          "data": [
-            {
-            },
-            {
+        }
+      },
+      "InventoryCollectionContainer": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Container"
             }
-          ],
-          "name": "name",
-          "all_manager_uuids": [
-            "all_manager_uuids",
-            "all_manager_uuids"
-          ],
-          "partial_data": [
-            null,
-            null
-          ],
-          "manager_uuids": [
-            "manager_uuids",
-            "manager_uuids"
-          ]
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Container"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerGroup": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerGroup"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerGroup"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerGroupTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerGroupTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerGroupTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerImage": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerImage"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerImage"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerImageTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerImageTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerImageTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerNode": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerNode"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerNode"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerNodeTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerNodeTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerNodeTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerProject": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerProject"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerProject"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerProjectTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerProjectTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerProjectTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerResourceQuota": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerResourceQuota"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerResourceQuota"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerTemplate": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerTemplate"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerTemplate"
+            }
+          }
+        }
+      },
+      "InventoryCollectionContainerTemplateTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerTemplateTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerTemplateTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionFlavor": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flavor"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flavor"
+            }
+          }
+        }
+      },
+      "InventoryCollectionOrchestrationStack": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrchestrationStack"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrchestrationStack"
+            }
+          }
+        }
+      },
+      "InventoryCollectionServiceInstance": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInstance"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInstance"
+            }
+          }
+        }
+      },
+      "InventoryCollectionServiceOffering": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOffering"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOffering"
+            }
+          }
+        }
+      },
+      "InventoryCollectionServiceOfferingIcon": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingIcon"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingIcon"
+            }
+          }
+        }
+      },
+      "InventoryCollectionServiceOfferingTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionServicePlan": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServicePlan"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServicePlan"
+            }
+          }
+        }
+      },
+      "InventoryCollectionSourceRegion": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceRegion"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceRegion"
+            }
+          }
+        }
+      },
+      "InventoryCollectionSubscription": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subscription"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subscription"
+            }
+          }
+        }
+      },
+      "InventoryCollectionTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionVm": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vm"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vm"
+            }
+          }
+        }
+      },
+      "InventoryCollectionVmTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VmTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VmTag"
+            }
+          }
+        }
+      },
+      "InventoryCollectionVolume": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Volume"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Volume"
+            }
+          }
+        }
+      },
+      "InventoryCollectionVolumeAttachment": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeAttachment"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeAttachment"
+            }
+          }
+        }
+      },
+      "InventoryCollectionVolumeType": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeType"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeType"
+            }
+          }
         }
       },
       "InventoryObject": {
@@ -739,7 +1818,9 @@
       "InventoryObjectLazy": {
         "type": "object",
         "required": [
-          "inventory_collection_name"
+          "inventory_collection_name",
+          "reference",
+          "ref"
         ],
         "properties": {
           "inventory_collection_name": {
@@ -752,17 +1833,6 @@
           },
           "ref": {
             "type": "string"
-          },
-          "key": {
-            "type": "string"
-          },
-          "default": {
-            "type": "object",
-            "properties": {
-            }
-          },
-          "transform_nested_lazy_finds": {
-            "type": "boolean"
           }
         }
       },
@@ -777,30 +1847,69 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "name": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+              "source_ref": {
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "OrchestrationStackReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^orchestration_stacks$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "Schema": {
         "type": "object",
@@ -818,43 +1927,76 @@
           {
             "type": "object",
             "required": [
-              "name",
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "name": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "external_url": {
-                "type": "string",
-                "description": "URL of the service instance in the external source (OpenShift, Azure, AWS, ...)."
+                "description": "URL of the service instance in the external source (OpenShift, Azure, AWS, ...).",
+                "nullable": true,
+                "type": "string"
               },
-              "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+              "extra": {
+                "nullable": true,
+                "type": "object"
               },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+              "name": {
+                "nullable": true,
+                "type": "string"
               },
               "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "service_offering": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingReference"
+                  }
+                ],
+                "nullable": true
               },
               "service_plan": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServicePlanReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
               },
               "source_region": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
+                "nullable": true
               },
               "subscription": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubscriptionReference"
+                  }
+                ],
+                "nullable": true
               }
             }
           }
@@ -871,55 +2013,84 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "name": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "description": {
+                "nullable": true,
                 "type": "string"
               },
               "display_name": {
-                "type": "string"
-              },
-              "documentation_url": {
-                "type": "string"
-              },
-              "long_description": {
+                "nullable": true,
                 "type": "string"
               },
               "distributor": {
+                "nullable": true,
                 "type": "string"
               },
-              "support_url": {
+              "documentation_url": {
+                "nullable": true,
                 "type": "string"
               },
               "extra": {
-                "type": "object",
-                "properties": {
-                }
+                "nullable": true,
+                "type": "object"
               },
-              "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+              "long_description": {
+                "nullable": true,
+                "type": "string"
               },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+              "name": {
+                "nullable": true,
+                "type": "string"
               },
               "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "source_region": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
-              },
-              "subscription": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "service_offering_icon": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingIconReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "subscription": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubscriptionReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "support_url": {
+                "nullable": true,
+                "type": "string"
               }
             }
           }
@@ -936,15 +2107,74 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "data": {
+                "nullable": true,
                 "type": "string"
               },
-              "data": {
+              "source_ref": {
                 "type": "string"
               }
             }
           }
         ]
+      },
+      "ServiceOfferingIconReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^service_offering_icons$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
+      },
+      "ServiceOfferingReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^service_offerings$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "ServiceOfferingTag": {
         "allOf": [
@@ -959,10 +2189,10 @@
             ],
             "properties": {
               "service_offering": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/ServiceOfferingReference"
               },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
               }
             }
           }
@@ -979,68 +2209,107 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
-              "name": {
-                "type": "string"
+              "create_json_schema": {
+                "nullable": true,
+                "type": "object"
               },
               "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "resource_version": {
+                "nullable": true,
                 "type": "string"
               },
+              "service_offering": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingReference"
+                  }
+                ],
+                "nullable": true
+              },
               "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "create_json_schema": {
-                "type": "object",
-                "properties": {
-                }
-              },
-              "update_json_schema": {
-                "type": "object",
-                "properties": {
-                }
-              },
-              "service_offering": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+              "source_ref": {
+                "type": "string"
               },
               "source_region": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
+                "nullable": true
               },
               "subscription": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubscriptionReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "update_json_schema": {
+                "nullable": true,
+                "type": "object"
               }
             }
           }
         ]
       },
-      "Source": {
+      "ServicePlanReference": {
         "type": "object",
         "required": [
-          "id",
-          "name"
+          "inventory_collection_name",
+          "reference",
+          "ref"
         ],
         "properties": {
-          "id": {
+          "inventory_collection_name": {
             "type": "string",
-            "format": "uuid",
-            "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+            "pattern": "^service_plans$"
           },
-          "name": {
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
             "type": "string",
-            "example": "Widget Adapter"
+            "pattern": "^manager_ref$"
           }
         }
       },
@@ -1055,18 +2324,54 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "name": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "endpoint": {
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
                 "type": "string"
               }
             }
           }
         ]
+      },
+      "SourceRegionReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^source_regions$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "Subscription": {
         "allOf": [
@@ -1079,15 +2384,50 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
                 "type": "string"
               }
             }
           }
         ]
+      },
+      "SubscriptionReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^subscriptions$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "Tag": {
         "allOf": [
@@ -1098,7 +2438,44 @@
             "type": "object",
             "required": [
               "name",
-              "namespace"
+              "namespace",
+              "value"
+            ],
+            "properties": {
+              "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "namespace": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "TagReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^tags$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "name",
+              "value"
             ],
             "properties": {
               "name": {
@@ -1106,13 +2483,14 @@
               },
               "value": {
                 "type": "string"
-              },
-              "namespace": {
-                "type": "string"
               }
             }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
           }
-        ]
+        }
       },
       "Vm": {
         "allOf": [
@@ -1125,70 +2503,128 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "uid_ems": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "hostname": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "power_state": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "cpus": {
+                "nullable": true,
                 "type": "integer"
               },
-              "memory": {
-                "type": "integer"
+              "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "flavor": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/FlavorReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "host_inventory_uuid": {
+                "description": "UUID of the host in host inventory",
+                "example": "82729f49-ed4e-4fc6-9ca1-b0ffee063874",
+                "format": "uuid",
+                "nullable": true,
+                "type": "string"
+              },
+              "hostname": {
+                "nullable": true,
+                "type": "string"
               },
               "mac_addresses": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
+                "description": "Array of all MAC addresses of this Vm",
                 "example": [
                   "06:d5:e7:4e:c8:92",
                   "06:d5:e7:4e:c8:93"
                 ],
-                "description": "Array of all MAC addresses of this Vm"
+                "items": {
+                  "type": "string"
+                },
+                "nullable": true,
+                "type": "array"
               },
-              "host_inventory_uuid": {
-                "type": "string",
-                "format": "uuid",
-                "example": "82729f49-ed4e-4fc6-9ca1-b0ffee063874",
-                "description": "UUID of the host in host inventory"
+              "memory": {
+                "nullable": true,
+                "type": "integer"
               },
-              "extra": {
-                "type": "object",
-                "properties": {
-                }
+              "name": {
+                "nullable": true,
+                "type": "string"
               },
-              "source_created_at": {
-                "type": "string",
-                "format": "date-time"
+              "orchestration_stack": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OrchestrationStackReference"
+                  }
+                ],
+                "nullable": true
               },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
+              "power_state": {
+                "nullable": true,
+                "type": "string"
               },
               "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
-              "flavor": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "uid_ems": {
+                "nullable": true,
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "VmReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^vms$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "VmTag": {
         "allOf": [
@@ -1202,11 +2638,11 @@
               "vm"
             ],
             "properties": {
-              "vm": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
-              },
               "tag": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "$ref": "#/components/schemas/TagReference"
+              },
+              "vm": {
+                "$ref": "#/components/schemas/VmReference"
               }
             }
           }
@@ -1223,49 +2659,60 @@
               "source_ref"
             ],
             "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "size": {
+                "nullable": true,
+                "type": "integer"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
               "source_ref": {
                 "type": "string"
               },
-              "name": {
-                "type": "string"
+              "source_region": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
+                "nullable": true
               },
               "state": {
-                "type": "string",
-                "enum": [
-                  "creating",
-                  "available",
-                  "in-use",
-                  "deleting",
-                  "deleted",
-                  "error",
-                  "unknown"
-                ]
-              },
-              "size": {
-                "type": "integer"
-              },
-              "extra": {
-                "type": "object",
-                "properties": {
-                }
-              },
-              "source_created_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "source_deleted_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "resource_timestamp": {
-                "type": "string",
-                "format": "date-time"
+                "nullable": true,
+                "type": "string"
               },
               "volume_type": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
-              },
-              "source_region": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VolumeTypeReference"
+                  }
+                ],
+                "nullable": true
               }
             }
           }
@@ -1283,27 +2730,52 @@
               "volume"
             ],
             "properties": {
-              "vm": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
-              },
-              "volume": {
-                "$ref": "#/components/schemas/InventoryObjectLazy"
-              },
               "device": {
+                "nullable": true,
                 "type": "string"
               },
               "state": {
-                "type": "string",
-                "enum": [
-                  "attaching",
-                  "attached",
-                  "detaching",
-                  "unknown"
-                ]
+                "nullable": true,
+                "type": "string"
+              },
+              "vm": {
+                "$ref": "#/components/schemas/VmReference"
+              },
+              "volume": {
+                "$ref": "#/components/schemas/VolumeReference"
               }
             }
           }
         ]
+      },
+      "VolumeReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^volumes$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       },
       "VolumeType": {
         "allOf": [
@@ -1316,23 +2788,58 @@
               "source_ref"
             ],
             "properties": {
-              "source_ref": {
-                "type": "string"
-              },
-              "name": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
                 "type": "string"
               },
               "description": {
+                "nullable": true,
                 "type": "string"
               },
               "extra": {
-                "type": "object",
-                "properties": {
-                }
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
               }
             }
           }
         ]
+      },
+      "VolumeTypeReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^volume_types$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
       }
     },
     "parameters": {
