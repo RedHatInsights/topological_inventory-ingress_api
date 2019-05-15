@@ -97,6 +97,107 @@
   },
   "components": {
     "schemas": {
+      "Cluster": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "uid_ems": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ClusterReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^clusters$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
+      },
+      "ClusterTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "cluster",
+              "tag"
+            ],
+            "properties": {
+              "cluster": {
+                "$ref": "#/components/schemas/ClusterReference"
+              },
+              "tag": {
+                "$ref": "#/components/schemas/TagReference"
+              }
+            }
+          }
+        ]
+      },
       "Container": {
         "allOf": [
           {
@@ -1009,6 +1110,135 @@
           }
         }
       },
+      "Host": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "cluster": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ClusterReference"
+                  }
+                ],
+                "nullable": true
+              },
+              "cpus": {
+                "nullable": true,
+                "type": "integer"
+              },
+              "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "hostname": {
+                "nullable": true,
+                "type": "string"
+              },
+              "memory": {
+                "nullable": true,
+                "type": "integer"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "power_state": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "uid_ems": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "HostReference": {
+        "type": "object",
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^hosts$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            }
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        }
+      },
+      "HostTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "host",
+              "tag"
+            ],
+            "properties": {
+              "host": {
+                "$ref": "#/components/schemas/HostReference"
+              },
+              "tag": {
+                "$ref": "#/components/schemas/TagReference"
+              }
+            }
+          }
+        ]
+      },
       "Inventory": {
         "type": "object",
         "required": [
@@ -1051,6 +1281,9 @@
             "items": {
               "anyOf": [
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionCluster"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionContainer"
                 },
                 {
@@ -1073,6 +1306,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionFlavor"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionHost"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionOrchestrationStack"
@@ -1105,6 +1341,9 @@
                   "$ref": "#/components/schemas/InventoryCollectionVolumeType"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionClusterTag"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionContainerGroupTag"
                 },
                 {
@@ -1118,6 +1357,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionContainerTemplateTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionHostTag"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionServiceOfferingTag"
@@ -1135,6 +1377,7 @@
               "discriminator": {
                 "propertyName": "name",
                 "mapping": {
+                  "clusters": "#/components/schemas/InventoryCollectionCluster",
                   "containers": "#/components/schemas/InventoryCollectionContainer",
                   "container_groups": "#/components/schemas/InventoryCollectionContainerGroup",
                   "container_images": "#/components/schemas/InventoryCollectionContainerImage",
@@ -1143,6 +1386,7 @@
                   "container_resource_quotas": "#/components/schemas/InventoryCollectionContainerResourceQuota",
                   "container_templates": "#/components/schemas/InventoryCollectionContainerTemplate",
                   "flavors": "#/components/schemas/InventoryCollectionFlavor",
+                  "hosts": "#/components/schemas/InventoryCollectionHost",
                   "orchestration_stacks": "#/components/schemas/InventoryCollectionOrchestrationStack",
                   "service_instances": "#/components/schemas/InventoryCollectionServiceInstance",
                   "service_offering_icons": "#/components/schemas/InventoryCollectionServiceOfferingIcon",
@@ -1153,11 +1397,13 @@
                   "vms": "#/components/schemas/InventoryCollectionVm",
                   "volumes": "#/components/schemas/InventoryCollectionVolume",
                   "volume_types": "#/components/schemas/InventoryCollectionVolumeType",
+                  "cluster_tags": "#/components/schemas/InventoryCollectionClusterTag",
                   "container_group_tags": "#/components/schemas/InventoryCollectionContainerGroupTag",
                   "container_image_tags": "#/components/schemas/InventoryCollectionContainerImageTag",
                   "container_node_tags": "#/components/schemas/InventoryCollectionContainerNodeTag",
                   "container_project_tags": "#/components/schemas/InventoryCollectionContainerProjectTag",
                   "container_template_tags": "#/components/schemas/InventoryCollectionContainerTemplateTag",
+                  "host_tags": "#/components/schemas/InventoryCollectionHostTag",
                   "service_offering_tags": "#/components/schemas/InventoryCollectionServiceOfferingTag",
                   "vm_tags": "#/components/schemas/InventoryCollectionVmTag",
                   "tags": "#/components/schemas/InventoryCollectionTag",
@@ -1187,6 +1433,52 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InventoryObject"
+            }
+          }
+        }
+      },
+      "InventoryCollectionCluster": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cluster"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cluster"
+            }
+          }
+        }
+      },
+      "InventoryCollectionClusterTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterTag"
             }
           }
         }
@@ -1486,6 +1778,52 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Flavor"
+            }
+          }
+        }
+      },
+      "InventoryCollectionHost": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Host"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Host"
+            }
+          }
+        }
+      },
+      "InventoryCollectionHostTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostTag"
             }
           }
         }
