@@ -1,4 +1,5 @@
 require "rails_helper"
+require 'topological_inventory/ingress_api/messaging_client'
 
 RSpec.describe("v0.0.2 - Inventory") do
   describe("/topological_inventory/ingress_api/0.0.2/inventory") do
@@ -228,6 +229,10 @@ RSpec.describe("v0.0.2 - Inventory") do
         }
       end
 
+      def match_response_message(pattern)
+        expect(JSON.parse(@response.body)["message"]).to match(pattern)
+      end
+
       let(:failed_validation_code) { "400" }
 
       context "correct payload" do
@@ -260,6 +265,8 @@ RSpec.describe("v0.0.2 - Inventory") do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/)
         end
 
         it "fails because we pass float instead of string" do
@@ -268,6 +275,8 @@ RSpec.describe("v0.0.2 - Inventory") do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is Float but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/)
         end
 
         it "fails because we pass integer instead of timestamp" do
@@ -275,8 +284,9 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("This should fail on invalid value, right now it might be coercing to nil and nil is allowed")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/)
         end
 
         it "fails because we pass invalid timestamp" do
@@ -284,8 +294,9 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("This should fail on invalid value, right now it might be coercing to nil and nil is allowed")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is String but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/)
         end
 
         it "fails because we pass integer instead of float" do
@@ -295,6 +306,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           pending("Integer is casted to float automatically, do we want strict check?")
           expect(@response.code).to eq(failed_validation_code)
+          expect(JSON.parse(@response.body)["message"]).to eq("")
         end
 
         it "fails because we pass string instead of float" do
@@ -304,6 +316,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           pending("Integer is casted to float automatically, do we want strict check?")
           expect(@response.code).to eq(failed_validation_code)
+          expect(JSON.parse(@response.body)["message"]).to eq("")
         end
 
         it "fails because we pass bad string instead of float" do
@@ -311,8 +324,9 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
-          pending("Invalid string is casted to float automatically, do we want strict check?")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is NilClass but it's not valid number).*?(\/schemas\/ContainerNode\/).*?(properties\/allocatable_cpus).*?/)
         end
 
         it "fails when passing array into type object" do
@@ -320,17 +334,19 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
-          pending("Object should be hash, right? For some reason this is passing.")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is Array but it's not valid object).*?(\/schemas\/ContainerNode\/).*?(properties\/node_info).*?/)
         end
 
-        it "fails when passing hash into type array" do
+        it "fails when passing object into type array" do
           container_node_data_1["conditions"] = {"a" => "b"}
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
-          pending("We should check array type")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(class is Hash but it's not valid array).*?(\/schemas\/ContainerNode\/).*?(properties\/conditions).*?/)
         end
       end
 
@@ -341,6 +357,8 @@ RSpec.describe("v0.0.2 - Inventory") do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(required parameters source_ref not exist).*?(\/schemas\/ContainerGroup\/).*?/)
         end
 
         it "fails on required NOT NULL attr being null" do
@@ -349,6 +367,8 @@ RSpec.describe("v0.0.2 - Inventory") do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(don't allow null)/)
         end
       end
 
@@ -360,8 +380,21 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("Right now the anyOf matches wrong InventoryCollection, we need the support for discriminator")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(inventory_collection_name).*?(container_groups).*?(isn't one of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
+        end
+
+        it "fails on wrong relation name that doesn't have alternatives" do
+          # Relation container_node must point to "inventory_collection_name" => "container_node", but has
+          # "inventory_collection_name" => "container_groups"
+          container_node_data_1["lives_on"]["inventory_collection_name"] = "made_up_ref"
+
+          post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
+
+          expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(made_up_ref isn't match \^cross_link_vms\$).*?(\/schemas\/CrossLinkVmReference\/).*?(properties\/inventory_collection_name).*?/)
         end
 
         it "fails on wrong relation reference attr" do
@@ -370,18 +403,20 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("Right now the anyOf matches wrong InventoryCollection, we need the support for discriminator")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't one of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
         end
 
         it "fails on wrong relation reference ref" do
           # Reference ref can be only "by_name" or "manager_ref"
-          container_group_data["container_node"]["reference"] = {"ref" => "by_non_xistent_attr"}
+          container_group_data["container_node"]["reference"] = {"ref" => "by_non_existent_attr"}
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("Right now the anyOf matches wrong InventoryCollection, we need the support for discriminator")
           expect(@response.code).to eq(failed_validation_code)
+          match_response_message(
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't one of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
         end
       end
 
@@ -394,6 +429,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           pending("Right now extra attributes in object are allowed, not respecting additionalProperties")
           expect(@response.code).to eq(failed_validation_code)
+          expect(JSON.parse(@response.body)["message"]).to eq("")
         end
 
         it "fails on unknown attribute in a relation" do
@@ -404,6 +440,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           pending("Right now extra attributes in object are allowed, not respecting additionalProperties")
           expect(@response.code).to eq(failed_validation_code)
+          expect(JSON.parse(@response.body)["message"]).to eq("")
         end
 
         it "fails on unknown attribute in a relation reference" do
@@ -414,6 +451,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           pending("Right now extra attributes in object are allowed, not respecting additionalProperties")
           expect(@response.code).to eq(failed_validation_code)
+          expect(JSON.parse(@response.body)["message"]).to eq("")
         end
       end
     end
