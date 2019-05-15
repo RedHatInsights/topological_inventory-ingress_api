@@ -501,7 +501,7 @@
             "properties": {
               "addresses": {
                 "nullable": true,
-                "type": "object"
+                "type": "array"
               },
               "allocatable_cpus": {
                 "format": "float",
@@ -523,7 +523,7 @@
               },
               "conditions": {
                 "nullable": true,
-                "type": "object"
+                "type": "array"
               },
               "cpus": {
                 "nullable": true,
