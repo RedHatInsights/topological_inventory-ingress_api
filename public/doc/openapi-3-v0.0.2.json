@@ -118,7 +118,11 @@
                 "$ref": "#/components/schemas/ContainerGroupReference"
               },
               "container_image": {
-                "$ref": "#/components/schemas/ContainerImageReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerImageReference"
+                  }
+                ],
                 "nullable": true
               },
               "cpu_limit": {
@@ -168,23 +172,31 @@
                 "type": "string"
               },
               "container_node": {
-                "oneOf": [
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerNodeReference"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ContainerNodeReferenceByName"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerNodeReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerNodeReferenceByName"
+                      }
+                    ]
                   }
                 ],
                 "nullable": true
               },
               "container_project": {
-                "oneOf": [
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerProjectReference"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
                   }
                 ],
                 "nullable": true
@@ -417,7 +429,11 @@
                 "type": "integer"
               },
               "lives_on": {
-                "$ref": "#/components/schemas/CrossLinkVmReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CrossLinkVmReference"
+                  }
+                ],
                 "nullable": true
               },
               "memory": {
@@ -709,12 +725,16 @@
                 "type": "string"
               },
               "container_project": {
-                "oneOf": [
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerProjectReference"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
                   }
                 ],
                 "nullable": true
@@ -774,12 +794,16 @@
                 "type": "string"
               },
               "container_project": {
-                "oneOf": [
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerProjectReference"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
                   }
                 ],
                 "nullable": true
@@ -1930,11 +1954,19 @@
                 "type": "string"
               },
               "service_offering": {
-                "$ref": "#/components/schemas/ServiceOfferingReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingReference"
+                  }
+                ],
                 "nullable": true
               },
               "service_plan": {
-                "$ref": "#/components/schemas/ServicePlanReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServicePlanReference"
+                  }
+                ],
                 "nullable": true
               },
               "source_created_at": {
@@ -1951,11 +1983,19 @@
                 "type": "string"
               },
               "source_region": {
-                "$ref": "#/components/schemas/SourceRegionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
                 "nullable": true
               },
               "subscription": {
-                "$ref": "#/components/schemas/SubscriptionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubscriptionReference"
+                  }
+                ],
                 "nullable": true
               }
             }
@@ -2012,7 +2052,11 @@
                 "type": "string"
               },
               "service_offering_icon": {
-                "$ref": "#/components/schemas/ServiceOfferingIconReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingIconReference"
+                  }
+                ],
                 "nullable": true
               },
               "source_created_at": {
@@ -2029,11 +2073,19 @@
                 "type": "string"
               },
               "source_region": {
-                "$ref": "#/components/schemas/SourceRegionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
                 "nullable": true
               },
               "subscription": {
-                "$ref": "#/components/schemas/SubscriptionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubscriptionReference"
+                  }
+                ],
                 "nullable": true
               },
               "support_url": {
@@ -2188,7 +2240,11 @@
                 "type": "string"
               },
               "service_offering": {
-                "$ref": "#/components/schemas/ServiceOfferingReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingReference"
+                  }
+                ],
                 "nullable": true
               },
               "source_created_at": {
@@ -2205,11 +2261,19 @@
                 "type": "string"
               },
               "source_region": {
-                "$ref": "#/components/schemas/SourceRegionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
                 "nullable": true
               },
               "subscription": {
-                "$ref": "#/components/schemas/SubscriptionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubscriptionReference"
+                  }
+                ],
                 "nullable": true
               },
               "update_json_schema": {
@@ -2457,7 +2521,11 @@
                 "type": "object"
               },
               "flavor": {
-                "$ref": "#/components/schemas/FlavorReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/FlavorReference"
+                  }
+                ],
                 "nullable": true
               },
               "host_inventory_uuid": {
@@ -2492,7 +2560,11 @@
                 "type": "string"
               },
               "orchestration_stack": {
-                "$ref": "#/components/schemas/OrchestrationStackReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OrchestrationStackReference"
+                  }
+                ],
                 "nullable": true
               },
               "power_state": {
@@ -2623,7 +2695,11 @@
                 "type": "string"
               },
               "source_region": {
-                "$ref": "#/components/schemas/SourceRegionReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SourceRegionReference"
+                  }
+                ],
                 "nullable": true
               },
               "state": {
@@ -2631,7 +2707,11 @@
                 "type": "string"
               },
               "volume_type": {
-                "$ref": "#/components/schemas/VolumeTypeReference",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VolumeTypeReference"
+                  }
+                ],
                 "nullable": true
               }
             }
