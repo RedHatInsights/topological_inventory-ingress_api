@@ -1,3 +1,4 @@
+require "topological_inventory/ingress_api"
 require "topological_inventory/ingress_api/messaging_client"
 
 module TopologicalInventory
@@ -7,7 +8,8 @@ module TopologicalInventory
         skip_before_action :verify_authenticity_token
 
         def save_inventory
-          payload = JSON.parse(request.body.read)
+          json_payload = request.body.read
+          payload      = JSON.parse(json_payload)
 
           root = OpenAPIParser.parse(TopologicalInventory::IngressApi::Docs["0.0"].content,
                                      {coerce_value: true, datetime_coerce_class: DateTime})
@@ -21,7 +23,9 @@ module TopologicalInventory
 
           TopologicalInventory::IngressApi.with_messaging_client do |client|
             begin
-              client.publish_message(save_inventory_payload(payload))
+              # TODO(lsmola) can use this after https://github.com/ManageIQ/manageiq-messaging/pull/45 is released
+              # client.publish_message(save_inventory_payload(json_payload))
+              client.publish_message(save_inventory_payload(JSON.parse(json_payload)))
             rescue Kafka::DeliveryFailed
               retry_count += 1
               retry unless retry_count > retry_max
@@ -49,9 +53,10 @@ module TopologicalInventory
 
         def save_inventory_payload(raw_payload)
           {
-            :service => "platform.topological-inventory.persister",
-            :message => "save_inventory",
-            :payload => raw_payload,
+            :service  => "platform.topological-inventory.persister",
+            :message  => "save_inventory",
+            :encoding => 'json',
+            :payload  => raw_payload,
           }
         end
       end
