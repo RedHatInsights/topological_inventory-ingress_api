@@ -427,9 +427,9 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("Right now extra attributes in object are allowed, not respecting additionalProperties")
           expect(@response.code).to eq(failed_validation_code)
-          expect(JSON.parse(@response.body)["message"]).to eq("")
+          match_response_message(
+            /.*?(properties made_up_attr are not defined).*?(\/schemas\/ContainerGroup).*?/)
         end
 
         it "fails on unknown attribute in a relation" do
@@ -438,9 +438,9 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("Right now extra attributes in object are allowed, not respecting additionalProperties")
           expect(@response.code).to eq(failed_validation_code)
-          expect(JSON.parse(@response.body)["message"]).to eq("")
+          match_response_message(
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't one of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
         end
 
         it "fails on unknown attribute in a relation reference" do
@@ -449,9 +449,9 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
-          pending("Right now extra attributes in object are allowed, not respecting additionalProperties")
           expect(@response.code).to eq(failed_validation_code)
-          expect(JSON.parse(@response.body)["message"]).to eq("")
+          match_response_message(
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't one of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
         end
       end
     end
