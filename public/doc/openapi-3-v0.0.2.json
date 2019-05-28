@@ -149,6 +149,7 @@
       },
       "ClusterReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -189,10 +190,26 @@
             ],
             "properties": {
               "cluster": {
-                "$ref": "#/components/schemas/ClusterReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ClusterReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -216,15 +233,18 @@
                 "type": "string"
               },
               "container_group": {
-                "$ref": "#/components/schemas/ContainerGroupReference"
-              },
-              "container_image": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerImageReference"
+                    "$ref": "#/components/schemas/ContainerGroupReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
                   }
-                ],
-                "nullable": true
+                ]
+              },
+              "container_image": {
+                "$ref": "#/components/schemas/ContainerImageReference"
               },
               "cpu_limit": {
                 "format": "double",
@@ -273,34 +293,24 @@
                 "type": "string"
               },
               "container_node": {
-                "allOf": [
+                "anyOf": [
                   {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/ContainerNodeReference"
-                      },
-                      {
-                        "$ref": "#/components/schemas/ContainerNodeReferenceByName"
-                      }
-                    ]
+                    "$ref": "#/components/schemas/ContainerNodeReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContainerNodeReferenceByName"
                   }
-                ],
-                "nullable": true
+                ]
               },
               "container_project": {
-                "allOf": [
+                "anyOf": [
                   {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/ContainerProjectReference"
-                      },
-                      {
-                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
-                      }
-                    ]
+                    "$ref": "#/components/schemas/ContainerProjectReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
                   }
-                ],
-                "nullable": true
+                ]
               },
               "ipaddress": {
                 "nullable": true,
@@ -338,6 +348,7 @@
       },
       "ContainerGroupReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -378,10 +389,26 @@
             ],
             "properties": {
               "container_group": {
-                "$ref": "#/components/schemas/ContainerGroupReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerGroupReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -439,6 +466,7 @@
       },
       "ContainerImageReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -479,10 +507,26 @@
             ],
             "properties": {
               "container_image": {
-                "$ref": "#/components/schemas/ContainerImageReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerImageReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -530,12 +574,7 @@
                 "type": "integer"
               },
               "lives_on": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CrossLinkVmReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/CrossLinkVmReference"
               },
               "memory": {
                 "nullable": true,
@@ -581,6 +620,7 @@
       },
       "ContainerNodeReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -610,6 +650,7 @@
       },
       "ContainerNodeReferenceByName": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -651,17 +692,33 @@
             ],
             "properties": {
               "container_node": {
-                "oneOf": [
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerNodeReference"
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerNodeReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerNodeReferenceByName"
+                      }
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ContainerNodeReferenceByName"
+                    "type": "object",
+                    "nullable": "false"
                   }
                 ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -723,6 +780,7 @@
       },
       "ContainerProjectReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -752,6 +810,7 @@
       },
       "ContainerProjectReferenceByName": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -793,17 +852,33 @@
             ],
             "properties": {
               "container_project": {
-                "oneOf": [
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ContainerProjectReference"
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReference"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                      }
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
+                    "type": "object",
+                    "nullable": "false"
                   }
                 ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -826,19 +901,14 @@
                 "type": "string"
               },
               "container_project": {
-                "allOf": [
+                "anyOf": [
                   {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/ContainerProjectReference"
-                      },
-                      {
-                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
-                      }
-                    ]
+                    "$ref": "#/components/schemas/ContainerProjectReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
                   }
-                ],
-                "nullable": true
+                ]
               },
               "name": {
                 "nullable": true,
@@ -895,19 +965,14 @@
                 "type": "string"
               },
               "container_project": {
-                "allOf": [
+                "anyOf": [
                   {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/ContainerProjectReference"
-                      },
-                      {
-                        "$ref": "#/components/schemas/ContainerProjectReferenceByName"
-                      }
-                    ]
+                    "$ref": "#/components/schemas/ContainerProjectReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContainerProjectReferenceByName"
                   }
-                ],
-                "nullable": true
+                ]
               },
               "name": {
                 "nullable": true,
@@ -941,6 +1006,7 @@
       },
       "ContainerTemplateReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -981,10 +1047,26 @@
             ],
             "properties": {
               "container_template": {
-                "$ref": "#/components/schemas/ContainerTemplateReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContainerTemplateReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -992,6 +1074,7 @@
       },
       "CrossLinkVmReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1082,6 +1165,7 @@
       },
       "FlavorReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1127,12 +1211,7 @@
                 "type": "string"
               },
               "cluster": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ClusterReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/ClusterReference"
               },
               "cpus": {
                 "nullable": true,
@@ -1190,6 +1269,7 @@
       },
       "HostReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1230,10 +1310,26 @@
             ],
             "properties": {
               "host": {
-                "$ref": "#/components/schemas/HostReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/HostReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -2222,6 +2318,7 @@
       },
       "OrchestrationStackReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2292,20 +2389,10 @@
                 "type": "string"
               },
               "service_offering": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceOfferingReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/ServiceOfferingReference"
               },
               "service_plan": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServicePlanReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/ServicePlanReference"
               },
               "source_created_at": {
                 "format": "date-time",
@@ -2321,20 +2408,10 @@
                 "type": "string"
               },
               "source_region": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SourceRegionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SourceRegionReference"
               },
               "subscription": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SubscriptionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SubscriptionReference"
               }
             }
           }
@@ -2390,12 +2467,7 @@
                 "type": "string"
               },
               "service_offering_icon": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceOfferingIconReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/ServiceOfferingIconReference"
               },
               "source_created_at": {
                 "format": "date-time",
@@ -2411,20 +2483,10 @@
                 "type": "string"
               },
               "source_region": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SourceRegionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SourceRegionReference"
               },
               "subscription": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SubscriptionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SubscriptionReference"
               },
               "support_url": {
                 "nullable": true,
@@ -2458,6 +2520,7 @@
       },
       "ServiceOfferingIconReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2487,6 +2550,7 @@
       },
       "ServiceOfferingReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2527,10 +2591,26 @@
             ],
             "properties": {
               "service_offering": {
-                "$ref": "#/components/schemas/ServiceOfferingReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -2578,12 +2658,7 @@
                 "type": "string"
               },
               "service_offering": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceOfferingReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/ServiceOfferingReference"
               },
               "source_created_at": {
                 "format": "date-time",
@@ -2599,20 +2674,10 @@
                 "type": "string"
               },
               "source_region": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SourceRegionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SourceRegionReference"
               },
               "subscription": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SubscriptionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SubscriptionReference"
               },
               "update_json_schema": {
                 "nullable": true,
@@ -2624,6 +2689,7 @@
       },
       "ServicePlanReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2684,6 +2750,7 @@
       },
       "SourceRegionReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2740,6 +2807,7 @@
       },
       "SubscriptionReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2799,6 +2867,7 @@
       },
       "TagReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2859,12 +2928,7 @@
                 "type": "object"
               },
               "flavor": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/FlavorReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/FlavorReference"
               },
               "host_inventory_uuid": {
                 "description": "UUID of the host in host inventory",
@@ -2898,12 +2962,7 @@
                 "type": "string"
               },
               "orchestration_stack": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrchestrationStackReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/OrchestrationStackReference"
               },
               "power_state": {
                 "nullable": true,
@@ -2937,6 +2996,7 @@
       },
       "VmReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2977,10 +3037,26 @@
             ],
             "properties": {
               "tag": {
-                "$ref": "#/components/schemas/TagReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "vm": {
-                "$ref": "#/components/schemas/VmReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VmReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -3033,24 +3109,14 @@
                 "type": "string"
               },
               "source_region": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SourceRegionReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/SourceRegionReference"
               },
               "state": {
                 "nullable": true,
                 "type": "string"
               },
               "volume_type": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/VolumeTypeReference"
-                  }
-                ],
-                "nullable": true
+                "$ref": "#/components/schemas/VolumeTypeReference"
               }
             }
           }
@@ -3077,10 +3143,26 @@
                 "type": "string"
               },
               "vm": {
-                "$ref": "#/components/schemas/VmReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VmReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               },
               "volume": {
-                "$ref": "#/components/schemas/VolumeReference"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VolumeReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": "false"
+                  }
+                ]
               }
             }
           }
@@ -3088,6 +3170,7 @@
       },
       "VolumeReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3152,6 +3235,7 @@
       },
       "VolumeTypeReference": {
         "type": "object",
+        "nullable": "false",
         "required": [
           "inventory_collection_name",
           "reference",
