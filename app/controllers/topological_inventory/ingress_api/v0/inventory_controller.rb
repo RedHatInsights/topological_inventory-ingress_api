@@ -12,7 +12,7 @@ module TopologicalInventory
           payload      = JSON.parse(json_payload)
 
           root = OpenAPIParser.parse(TopologicalInventory::IngressApi::Docs["0.0"].content,
-                                     {coerce_value: true, datetime_coerce_class: DateTime})
+                                     :coerce_value => true, :datetime_coerce_class => DateTime)
 
           request_operation = root.request_operation(:post, '/inventory')
 
@@ -36,7 +36,7 @@ module TopologicalInventory
             :message => "ok",
           }.to_json
         rescue OpenAPIParser::OpenAPIError => e
-          render :status => 400, :json => {
+          render :status => :bad_request, :json => {
             :message    => e.message,
             :error_code => e.class.to_s,
           }.to_json

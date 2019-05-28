@@ -90,8 +90,7 @@ RSpec.describe("v0.0.2 - Inventory") do
              "data" => [
                container_node_data_1,
                container_node_data_2
-             ]
-            }
+             ]}
           ]
         }
       end
@@ -240,21 +239,21 @@ RSpec.describe("v0.0.2 - Inventory") do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq("200")
-          expect(JSON.parse(@response.body)).to eq({"message" => "ok"})
+          expect(JSON.parse(@response.body)).to eq("message" => "ok")
         end
 
         it "passes with valid container nodes" do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_body), :headers => headers)
 
           expect(@response.code).to eq("200")
-          expect(JSON.parse(@response.body)).to eq({"message" => "ok"})
+          expect(JSON.parse(@response.body)).to eq("message" => "ok")
         end
 
         it "passes with valid container groups and nodes" do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_node_and_group_body), :headers => headers)
 
           expect(@response.code).to eq("200")
-          expect(JSON.parse(@response.body)).to eq({"message" => "ok"})
+          expect(JSON.parse(@response.body)).to eq("message" => "ok")
         end
       end
 
@@ -266,7 +265,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/)
+            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/
+          )
         end
 
         it "fails because we pass float instead of string" do
@@ -276,7 +276,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Float but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/)
+            /.*?(class is Float but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/
+          )
         end
 
         it "fails because we pass integer instead of timestamp" do
@@ -286,7 +287,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/)
+            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/
+          )
         end
 
         it "fails because we pass invalid timestamp" do
@@ -296,7 +298,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is String but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/)
+            /.*?(class is String but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/
+          )
         end
 
         it "fails because we pass integer instead of float" do
@@ -326,7 +329,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is NilClass but it's not valid number).*?(\/schemas\/ContainerNode\/).*?(properties\/allocatable_cpus).*?/)
+            /.*?(class is NilClass but it's not valid number).*?(\/schemas\/ContainerNode\/).*?(properties\/allocatable_cpus).*?/
+          )
         end
 
         it "fails when passing array into type object" do
@@ -336,7 +340,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Array but it's not valid object).*?(\/schemas\/ContainerNode\/).*?(properties\/node_info).*?/)
+            /.*?(class is Array but it's not valid object).*?(\/schemas\/ContainerNode\/).*?(properties\/node_info).*?/
+          )
         end
 
         it "fails when passing object into type array" do
@@ -346,7 +351,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Hash but it's not valid array).*?(\/schemas\/ContainerNode\/).*?(properties\/conditions).*?/)
+            /.*?(class is Hash but it's not valid array).*?(\/schemas\/ContainerNode\/).*?(properties\/conditions).*?/
+          )
         end
       end
 
@@ -358,7 +364,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(required parameters source_ref not exist).*?(\/schemas\/ContainerGroup\/).*?/)
+            /.*?(required parameters source_ref not exist).*?(\/schemas\/ContainerGroup\/).*?/
+          )
         end
 
         it "fails on required NOT NULL attr being null" do
@@ -368,7 +375,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(don't allow null)/)
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(don't allow null)/
+          )
         end
       end
 
@@ -382,7 +390,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(inventory_collection_name).*?(container_groups).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
+            /.*?(inventory_collection_name).*?(container_groups).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/
+          )
         end
 
         it "passes with relation being nil" do
@@ -392,7 +401,7 @@ RSpec.describe("v0.0.2 - Inventory") do
           post("/topological_inventory/ingress_api/0.0.2/inventory", :params => JSON.dump(container_group_body), :headers => headers)
 
           expect(@response.code).to eq("200")
-          expect(JSON.parse(@response.body)).to eq({"message" => "ok"})
+          expect(JSON.parse(@response.body)).to eq("message" => "ok")
         end
 
         it "fails on wrong relation name that doesn't have alternatives" do
@@ -404,7 +413,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(made_up_ref isn't match \^cross_link_vms\$).*?(\/schemas\/CrossLinkVmReference\/).*?(properties\/inventory_collection_name).*?/)
+            /.*?(made_up_ref isn't match \^cross_link_vms\$).*?(\/schemas\/CrossLinkVmReference\/).*?(properties\/inventory_collection_name).*?/
+          )
         end
 
         it "fails on wrong relation reference attr" do
@@ -415,7 +425,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/
+          )
         end
 
         it "fails on wrong relation reference ref" do
@@ -426,7 +437,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/
+          )
         end
       end
 
@@ -439,7 +451,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(properties made_up_attr are not defined).*?(\/schemas\/ContainerGroup).*?/)
+            /.*?(properties made_up_attr are not defined).*?(\/schemas\/ContainerGroup).*?/
+          )
         end
 
         it "fails on unknown attribute in a relation" do
@@ -450,7 +463,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/
+          )
         end
 
         it "fails on unknown attribute in a relation reference" do
@@ -461,7 +475,8 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/)
+            /.*?(inventory_collection_name).*?(container_nodes).*?(isn't any of).*?(\/schemas\/ContainerGroup\/).*?(properties\/container_node).*?/
+          )
         end
       end
     end
