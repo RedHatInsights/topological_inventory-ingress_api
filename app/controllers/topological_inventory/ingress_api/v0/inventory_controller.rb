@@ -10,6 +10,7 @@ module TopologicalInventory
         def save_inventory
           json_payload = request.body.read
           payload      = JSON.parse(json_payload)
+          dup_payload  = payload.deep_dup
 
           root = OpenAPIParser.parse(TopologicalInventory::IngressApi::Docs["0.0"].content,
                                      :coerce_value => true, :datetime_coerce_class => DateTime)
@@ -25,7 +26,7 @@ module TopologicalInventory
             begin
               # TODO(lsmola) can use this after https://github.com/ManageIQ/manageiq-messaging/pull/45 is released
               # client.publish_message(save_inventory_payload(json_payload))
-              client.publish_message(save_inventory_payload(JSON.parse(json_payload)))
+              client.publish_message(save_inventory_payload(dup_payload))
             rescue Kafka::DeliveryFailed
               retry_count += 1
               retry unless retry_count > retry_max
