@@ -5,7 +5,8 @@ require File.join(Bundler::Plugin.index.load_paths("bundler-inject")[0], "bundle
 
 gem 'json-schema',       '~> 2.8'
 gem 'manageiq-loggers',  '~> 0.1'
-gem 'openapi_parser',    '~> 0.3.0'
+# In 0.3.1 additionalProperties of objects default to true, we have to put everywhere additionalProperites : false
+gem 'openapi_parser',    '= 0.3.0'
 gem 'prometheus-client', '~> 0.8.0'
 gem 'puma',              '~> 3.0'
 gem 'rack-cors',         '>= 0.4.1'
