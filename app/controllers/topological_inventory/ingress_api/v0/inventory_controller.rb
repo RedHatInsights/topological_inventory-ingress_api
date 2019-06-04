@@ -1,4 +1,5 @@
 require "topological_inventory/ingress_api"
+require "topological_inventory/ingress_api/docs"
 require "topological_inventory/ingress_api/messaging_client"
 
 module TopologicalInventory
