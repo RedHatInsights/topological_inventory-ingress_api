@@ -150,7 +150,7 @@
       },
       "ClusterReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -357,7 +357,7 @@
       },
       "ContainerGroupReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -481,7 +481,7 @@
       },
       "ContainerImageReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -647,7 +647,7 @@
       },
       "ContainerNodeReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -679,7 +679,7 @@
       },
       "ContainerNodeReferenceByName": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -815,7 +815,7 @@
       },
       "ContainerProjectReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -847,7 +847,7 @@
       },
       "ContainerProjectReferenceByName": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1050,7 +1050,7 @@
       },
       "ContainerTemplateReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1123,7 +1123,7 @@
       },
       "CrossLinkVmReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1217,7 +1217,7 @@
       },
       "FlavorReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1324,7 +1324,7 @@
       },
       "HostReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2414,7 +2414,7 @@
       },
       "OrchestrationStackReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2622,7 +2622,7 @@
       },
       "ServiceOfferingIconReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2654,7 +2654,7 @@
       },
       "ServiceOfferingReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2799,7 +2799,7 @@
       },
       "ServicePlanReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2863,7 +2863,7 @@
       },
       "SourceRegionReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2923,7 +2923,7 @@
       },
       "SubscriptionReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2986,7 +2986,7 @@
       },
       "TagReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3122,7 +3122,7 @@
       },
       "VmReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3305,7 +3305,7 @@
       },
       "VolumeReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3373,7 +3373,7 @@
       },
       "VolumeTypeReference": {
         "type": "object",
-        "nullable": false,
+        "nullable": true,
         "required": [
           "inventory_collection_name",
           "reference",
