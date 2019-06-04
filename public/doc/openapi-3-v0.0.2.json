@@ -150,7 +150,7 @@
       },
       "ClusterReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -199,7 +199,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -211,7 +211,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -245,7 +245,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -357,7 +357,7 @@
       },
       "ContainerGroupReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -406,7 +406,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -418,7 +418,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -481,7 +481,7 @@
       },
       "ContainerImageReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -530,7 +530,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -542,7 +542,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -564,6 +564,9 @@
             ],
             "properties": {
               "addresses": {
+                "items": {
+                  "type": "object"
+                },
                 "nullable": true,
                 "type": "array"
               },
@@ -586,6 +589,9 @@
                 "type": "string"
               },
               "conditions": {
+                "items": {
+                  "type": "object"
+                },
                 "nullable": true,
                 "type": "array"
               },
@@ -641,7 +647,7 @@
       },
       "ContainerNodeReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -673,7 +679,7 @@
       },
       "ContainerNodeReferenceByName": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -730,7 +736,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -742,7 +748,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -809,7 +815,7 @@
       },
       "ContainerProjectReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -841,7 +847,7 @@
       },
       "ContainerProjectReferenceByName": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -898,7 +904,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -910,7 +916,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -1044,7 +1050,7 @@
       },
       "ContainerTemplateReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1093,7 +1099,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -1105,7 +1111,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -1117,7 +1123,7 @@
       },
       "CrossLinkVmReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1211,7 +1217,7 @@
       },
       "FlavorReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1318,7 +1324,7 @@
       },
       "HostReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -1367,7 +1373,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -1379,7 +1385,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -2408,7 +2414,7 @@
       },
       "OrchestrationStackReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2616,7 +2622,7 @@
       },
       "ServiceOfferingIconReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2648,7 +2654,7 @@
       },
       "ServiceOfferingReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2697,7 +2703,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -2709,7 +2715,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -2793,7 +2799,7 @@
       },
       "ServicePlanReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2857,7 +2863,7 @@
       },
       "SourceRegionReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2917,7 +2923,7 @@
       },
       "SubscriptionReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -2980,7 +2986,7 @@
       },
       "TagReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3116,7 +3122,7 @@
       },
       "VmReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3165,7 +3171,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -3177,7 +3183,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -3275,7 +3281,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -3287,7 +3293,7 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false",
+                    "nullable": false,
                     "additionalProperties": false
                   }
                 ]
@@ -3299,7 +3305,7 @@
       },
       "VolumeReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
@@ -3367,7 +3373,7 @@
       },
       "VolumeTypeReference": {
         "type": "object",
-        "nullable": "false",
+        "nullable": false,
         "required": [
           "inventory_collection_name",
           "reference",
