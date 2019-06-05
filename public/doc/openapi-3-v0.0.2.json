@@ -143,7 +143,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -169,13 +170,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ClusterTag": {
         "allOf": [
@@ -196,7 +199,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -207,11 +211,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -239,7 +245,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -272,7 +279,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -342,7 +350,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -368,13 +377,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerGroupTag": {
         "allOf": [
@@ -395,7 +406,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -406,11 +418,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -460,7 +474,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -486,13 +501,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerImageTag": {
         "allOf": [
@@ -513,7 +530,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -524,11 +542,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -614,7 +634,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -640,13 +661,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerNodeReferenceByName": {
         "type": "object",
@@ -671,13 +694,15 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^by_name$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerNodeTag": {
         "allOf": [
@@ -705,7 +730,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -716,11 +742,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -774,7 +802,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -800,13 +829,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerProjectReferenceByName": {
         "type": "object",
@@ -831,13 +862,15 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^by_name$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerProjectTag": {
         "allOf": [
@@ -865,7 +898,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -876,11 +910,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -944,7 +980,8 @@
                 "nullable": true,
                 "type": "object"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -1000,7 +1037,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -1026,13 +1064,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ContainerTemplateTag": {
         "allOf": [
@@ -1053,7 +1093,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -1064,11 +1105,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -1095,13 +1138,15 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "Flavor": {
         "allOf": [
@@ -1159,7 +1204,8 @@
                 "description": "Unique identifier of the entity.",
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -1186,13 +1232,15 @@
                 "description": "Unique identifier of the entity.",
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "Host": {
         "allOf": [
@@ -1263,7 +1311,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -1289,13 +1338,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "HostTag": {
         "allOf": [
@@ -1316,7 +1367,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -1327,11 +1379,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -1508,7 +1562,8 @@
               }
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollection": {
         "type": "object",
@@ -1531,7 +1586,8 @@
               "$ref": "#/components/schemas/InventoryObject"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionCluster": {
         "type": "object",
@@ -1554,7 +1610,8 @@
               "$ref": "#/components/schemas/Cluster"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionClusterTag": {
         "type": "object",
@@ -1577,7 +1634,8 @@
               "$ref": "#/components/schemas/ClusterTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainer": {
         "type": "object",
@@ -1600,7 +1658,8 @@
               "$ref": "#/components/schemas/Container"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerGroup": {
         "type": "object",
@@ -1623,7 +1682,8 @@
               "$ref": "#/components/schemas/ContainerGroup"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerGroupTag": {
         "type": "object",
@@ -1646,7 +1706,8 @@
               "$ref": "#/components/schemas/ContainerGroupTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerImage": {
         "type": "object",
@@ -1669,7 +1730,8 @@
               "$ref": "#/components/schemas/ContainerImage"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerImageTag": {
         "type": "object",
@@ -1692,7 +1754,8 @@
               "$ref": "#/components/schemas/ContainerImageTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerNode": {
         "type": "object",
@@ -1715,7 +1778,8 @@
               "$ref": "#/components/schemas/ContainerNode"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerNodeTag": {
         "type": "object",
@@ -1738,7 +1802,8 @@
               "$ref": "#/components/schemas/ContainerNodeTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerProject": {
         "type": "object",
@@ -1761,7 +1826,8 @@
               "$ref": "#/components/schemas/ContainerProject"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerProjectTag": {
         "type": "object",
@@ -1784,7 +1850,8 @@
               "$ref": "#/components/schemas/ContainerProjectTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerResourceQuota": {
         "type": "object",
@@ -1807,7 +1874,8 @@
               "$ref": "#/components/schemas/ContainerResourceQuota"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerTemplate": {
         "type": "object",
@@ -1830,7 +1898,8 @@
               "$ref": "#/components/schemas/ContainerTemplate"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionContainerTemplateTag": {
         "type": "object",
@@ -1853,7 +1922,8 @@
               "$ref": "#/components/schemas/ContainerTemplateTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionFlavor": {
         "type": "object",
@@ -1876,7 +1946,8 @@
               "$ref": "#/components/schemas/Flavor"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionHost": {
         "type": "object",
@@ -1899,7 +1970,8 @@
               "$ref": "#/components/schemas/Host"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionHostTag": {
         "type": "object",
@@ -1922,7 +1994,8 @@
               "$ref": "#/components/schemas/HostTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionOrchestrationStack": {
         "type": "object",
@@ -1945,7 +2018,8 @@
               "$ref": "#/components/schemas/OrchestrationStack"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionServiceInstance": {
         "type": "object",
@@ -1968,7 +2042,8 @@
               "$ref": "#/components/schemas/ServiceInstance"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionServiceOffering": {
         "type": "object",
@@ -1991,7 +2066,8 @@
               "$ref": "#/components/schemas/ServiceOffering"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionServiceOfferingIcon": {
         "type": "object",
@@ -2014,7 +2090,8 @@
               "$ref": "#/components/schemas/ServiceOfferingIcon"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionServiceOfferingTag": {
         "type": "object",
@@ -2037,7 +2114,8 @@
               "$ref": "#/components/schemas/ServiceOfferingTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionServicePlan": {
         "type": "object",
@@ -2060,7 +2138,8 @@
               "$ref": "#/components/schemas/ServicePlan"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionSourceRegion": {
         "type": "object",
@@ -2083,7 +2162,8 @@
               "$ref": "#/components/schemas/SourceRegion"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionSubscription": {
         "type": "object",
@@ -2106,7 +2186,8 @@
               "$ref": "#/components/schemas/Subscription"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionTag": {
         "type": "object",
@@ -2129,7 +2210,8 @@
               "$ref": "#/components/schemas/Tag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionVm": {
         "type": "object",
@@ -2152,7 +2234,8 @@
               "$ref": "#/components/schemas/Vm"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionVmTag": {
         "type": "object",
@@ -2175,7 +2258,8 @@
               "$ref": "#/components/schemas/VmTag"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionVolume": {
         "type": "object",
@@ -2198,7 +2282,8 @@
               "$ref": "#/components/schemas/Volume"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionVolumeAttachment": {
         "type": "object",
@@ -2221,7 +2306,8 @@
               "$ref": "#/components/schemas/VolumeAttachment"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryCollectionVolumeType": {
         "type": "object",
@@ -2244,10 +2330,12 @@
               "$ref": "#/components/schemas/VolumeType"
             }
           }
-        }
+        },
+        "additionalProperties": false
       },
       "InventoryObject": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "InventoryObjectLazy": {
         "type": "object",
@@ -2268,7 +2356,8 @@
           "ref": {
             "type": "string"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "OrchestrationStack": {
         "allOf": [
@@ -2312,7 +2401,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2338,13 +2428,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "Schema": {
         "type": "object",
@@ -2352,7 +2444,8 @@
           "name": {
             "type": "string"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ServiceInstance": {
         "allOf": [
@@ -2413,7 +2506,8 @@
               "subscription": {
                 "$ref": "#/components/schemas/SubscriptionReference"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2492,7 +2586,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2514,7 +2609,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2540,13 +2636,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ServiceOfferingReference": {
         "type": "object",
@@ -2570,13 +2668,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ServiceOfferingTag": {
         "allOf": [
@@ -2597,7 +2697,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -2608,11 +2709,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2683,7 +2786,8 @@
                 "nullable": true,
                 "type": "object"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2709,13 +2813,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "SourceRegion": {
         "allOf": [
@@ -2744,7 +2850,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2770,13 +2877,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "Subscription": {
         "allOf": [
@@ -2801,7 +2910,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2827,13 +2937,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "Tag": {
         "allOf": [
@@ -2861,7 +2973,8 @@
               "value": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -2895,13 +3008,15 @@
               "value": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "Vm": {
         "allOf": [
@@ -2994,7 +3109,8 @@
                 "nullable": true,
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -3020,13 +3136,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "VmTag": {
         "allOf": [
@@ -3047,7 +3165,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -3058,11 +3177,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -3122,7 +3243,8 @@
               "volume_type": {
                 "$ref": "#/components/schemas/VolumeTypeReference"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -3153,7 +3275,8 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               },
@@ -3164,11 +3287,13 @@
                   },
                   {
                     "type": "object",
-                    "nullable": "false"
+                    "nullable": "false",
+                    "additionalProperties": false
                   }
                 ]
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -3194,13 +3319,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "VolumeType": {
         "allOf": [
@@ -3233,7 +3360,8 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           }
         ]
       },
@@ -3259,13 +3387,15 @@
               "source_ref": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "ref": {
             "type": "string",
             "pattern": "^manager_ref$"
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "parameters": {
