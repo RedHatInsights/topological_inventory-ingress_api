@@ -3004,10 +3004,14 @@
             "type": "object",
             "required": [
               "name",
-              "value"
+              "value",
+              "namespace"
             ],
             "properties": {
               "name": {
+                "type": "string"
+              },
+              "namespace": {
                 "type": "string"
               },
               "value": {
