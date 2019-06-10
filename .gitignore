@@ -16,3 +16,4 @@
 /tmp/
 /v2_key
 /public/doc/*.jar
+/public/doc/openapi*generator.yaml
