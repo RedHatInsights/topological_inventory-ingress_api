@@ -1,5 +1,6 @@
 require "rails_helper"
 require 'topological_inventory/ingress_api/messaging_client'
+require "pry-byebug"
 
 RSpec.describe("v0.0.2 - Inventory") do
   describe("/topological_inventory/ingress_api/0.0.2/inventory") do
