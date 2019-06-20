@@ -36,7 +36,7 @@ RSpec.describe("v0.0.2 - Inventory") do
         client = double
         allow(client).to receive(:publish_message)
 
-        allow(TopologicalInventory::IngressApi).to receive(:with_messaging_client).and_yield(client)
+        allow(TopologicalInventory::IngressApi::V0x0x2::InventoryController).to receive(:with_messaging_client).and_yield(client)
       end
 
       let(:headers) do
