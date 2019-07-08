@@ -10,17 +10,12 @@ module TopologicalInventory
 
         def save_inventory
           json_payload = request.body.read
-          payload      = JSON.parse(json_payload)
-          dup_payload  = payload.deep_dup
-
-          retry_count = 0
-          retry_max   = 1
+          retry_count  = 0
+          retry_max    = 1
 
           self.class.with_messaging_client do |client|
             begin
-              # TODO(lsmola) can use this after https://github.com/ManageIQ/manageiq-messaging/pull/45 is released
-              # client.publish_message(save_inventory_payload(json_payload))
-              client.publish_message(save_inventory_payload(dup_payload))
+              client.publish_message(save_inventory_payload(json_payload))
             rescue Kafka::DeliveryFailed
               retry_count += 1
               retry unless retry_count > retry_max
