@@ -1208,11 +1208,92 @@
                 "type": "integer",
                 "nullable": true,
                 "description": "How much total space (bytes) does the storage have"
-              },
+              }
             },
             "additionalProperties": false
           }
         ]
+      },
+      "DatastoreMount": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "datastore",
+              "host"
+            ],
+            "properties": {
+              "accessible": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "datastore": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DatastoreReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "host": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/HostReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "read_only": {
+                "type": "boolean",
+                "nullable": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "DatastoreReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^datastores$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
       },
       "Flavor": {
         "allOf": [
