@@ -1295,6 +1295,47 @@
         },
         "additionalProperties": false
       },
+      "DatastoreTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "tag",
+              "datastore"
+            ],
+            "properties": {
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "vm": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DatastoreReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
       "Flavor": {
         "allOf": [
           {
