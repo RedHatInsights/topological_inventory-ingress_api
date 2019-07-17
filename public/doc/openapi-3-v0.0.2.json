@@ -1154,6 +1154,66 @@
         },
         "additionalProperties": false
       },
+      "Datastore": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "accessible": {
+                "type": "boolean",
+                "nullable": true,
+                "description": "Is the datastore accessible or not?"
+              },
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "description": "Free form document for storing SourceType's specific attributes.",
+                "nullable": true,
+                "type": "object"
+              },
+              "free_space": {
+                "type": "integer",
+                "nullable": true,
+                "description": "How much space (bytes) is still available to be allocated"
+              },
+              "location": {
+                "type": "string",
+                "nullable": true,
+                "description": "The physical location of the storage"
+              },
+              "name": {
+                "type": "string",
+                "nullable": true,
+                "description": "Friendly name for this storage"
+              },
+              "source_ref": {
+                "type": "string",
+                "description": "Unique reference for this storage"
+              },
+              "status": {
+                "type": "string",
+                "nullable": true,
+                "description": "High level status of the storage"
+              },
+              "total_space": {
+                "type": "integer",
+                "nullable": true,
+                "description": "How much total space (bytes) does the storage have"
+              },
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
       "Flavor": {
         "allOf": [
           {
