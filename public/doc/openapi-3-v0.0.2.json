@@ -1726,6 +1726,7 @@
                   "container_projects": "#/components/schemas/InventoryCollectionContainerProject",
                   "container_resource_quotas": "#/components/schemas/InventoryCollectionContainerResourceQuota",
                   "container_templates": "#/components/schemas/InventoryCollectionContainerTemplate",
+                  "datastores": "#/components/schemas/InventoryCollectionDatastore",
                   "flavors": "#/components/schemas/InventoryCollectionFlavor",
                   "hosts": "#/components/schemas/InventoryCollectionHost",
                   "orchestration_stacks": "#/components/schemas/InventoryCollectionOrchestrationStack",
@@ -2111,6 +2112,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContainerTemplateTag"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionDatastore": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Datastore"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Datastore"
             }
           }
         },
