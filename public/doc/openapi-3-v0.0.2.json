@@ -2975,15 +2975,15 @@
                 "type": "object"
               },
               "ipaddress": {
+                "nullable": true,
+                "type": "string"
+              },
+              "kind": {
                 "enum": [
                   "private",
                   "public",
                   "elastic"
                 ],
-                "nullable": true,
-                "type": "string"
-              },
-              "kind": {
                 "type": "string"
               },
               "network_adapter": {
