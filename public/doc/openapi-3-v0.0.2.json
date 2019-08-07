@@ -3215,6 +3215,12 @@
               },
               "source_ref": {
                 "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
               }
             },
             "additionalProperties": false
