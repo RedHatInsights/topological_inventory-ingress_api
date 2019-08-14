@@ -1166,9 +1166,9 @@
             ],
             "properties": {
               "accessible": {
-                "type": "boolean",
+                "description": "Is the datastore accessible or not?",
                 "nullable": true,
-                "description": "Is the datastore accessible or not?"
+                "type": "boolean"
               },
               "archived_at": {
                 "format": "date-time",
@@ -1181,33 +1181,43 @@
                 "type": "object"
               },
               "free_space": {
-                "type": "integer",
+                "description": "How much space (bytes) is still available to be allocated",
                 "nullable": true,
-                "description": "How much space (bytes) is still available to be allocated"
+                "type": "integer"
               },
               "location": {
-                "type": "string",
+                "description": "The physical location of the storage",
                 "nullable": true,
-                "description": "The physical location of the storage"
+                "type": "string"
               },
               "name": {
-                "type": "string",
+                "description": "Friendly name for this storage",
                 "nullable": true,
-                "description": "Friendly name for this storage"
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
               },
               "source_ref": {
-                "type": "string",
-                "description": "Unique reference for this storage"
+                "description": "Unique reference for this storage",
+                "type": "string"
               },
               "status": {
-                "type": "string",
+                "description": "High level status of the storage",
                 "nullable": true,
-                "description": "High level status of the storage"
+                "type": "string"
               },
               "total_space": {
-                "type": "integer",
+                "description": "How much total space (bytes) does the storage have",
                 "nullable": true,
-                "description": "How much total space (bytes) does the storage have"
+                "type": "integer"
               }
             },
             "additionalProperties": false
@@ -1227,8 +1237,8 @@
             ],
             "properties": {
               "accessible": {
-                "type": "boolean",
-                "nullable": true
+                "nullable": true,
+                "type": "boolean"
               },
               "datastore": {
                 "allOf": [
@@ -1255,8 +1265,8 @@
                 ]
               },
               "read_only": {
-                "type": "boolean",
-                "nullable": true
+                "nullable": true,
+                "type": "boolean"
               }
             },
             "additionalProperties": false
@@ -1283,6 +1293,7 @@
             ],
             "properties": {
               "source_ref": {
+                "description": "Unique reference for this storage",
                 "type": "string"
               }
             },
@@ -1303,14 +1314,14 @@
           {
             "type": "object",
             "required": [
-              "tag",
-              "datastore"
+              "datastore",
+              "tag"
             ],
             "properties": {
-              "tag": {
+              "datastore": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TagReference"
+                    "$ref": "#/components/schemas/DatastoreReference"
                   },
                   {
                     "type": "object",
@@ -1319,10 +1330,10 @@
                   }
                 ]
               },
-              "vm": {
+              "tag": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/DatastoreReference"
+                    "$ref": "#/components/schemas/TagReference"
                   },
                   {
                     "type": "object",
@@ -1646,16 +1657,31 @@
                   "$ref": "#/components/schemas/InventoryCollectionContainerTemplate"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionDatastore"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionFlavor"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionIpaddress"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionHost"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionNetworkAdapter"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionNetwork"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionOrchestrationStack"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionServiceInstance"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionSecurityGroup"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionServiceOfferingIcon"
@@ -1668,6 +1694,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionSourceRegion"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionSubnet"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionSubscription"
@@ -1700,10 +1729,28 @@
                   "$ref": "#/components/schemas/InventoryCollectionContainerTemplateTag"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionDatastoreTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionIpaddressTag"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionHostTag"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionNetworkAdapterTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionNetworkTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionSecurityGroupTag"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionServiceOfferingTag"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionSubnetTag"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionVmTag"
@@ -1712,7 +1759,13 @@
                   "$ref": "#/components/schemas/InventoryCollectionTag"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionDatastoreMount"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionVolumeAttachment"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionVmSecurityGroup"
                 }
               ],
               "discriminator": {
@@ -1728,13 +1781,18 @@
                   "container_templates": "#/components/schemas/InventoryCollectionContainerTemplate",
                   "datastores": "#/components/schemas/InventoryCollectionDatastore",
                   "flavors": "#/components/schemas/InventoryCollectionFlavor",
+                  "ipaddresses": "#/components/schemas/InventoryCollectionIpaddress",
                   "hosts": "#/components/schemas/InventoryCollectionHost",
+                  "network_adapters": "#/components/schemas/InventoryCollectionNetworkAdapter",
+                  "networks": "#/components/schemas/InventoryCollectionNetwork",
                   "orchestration_stacks": "#/components/schemas/InventoryCollectionOrchestrationStack",
                   "service_instances": "#/components/schemas/InventoryCollectionServiceInstance",
+                  "security_groups": "#/components/schemas/InventoryCollectionSecurityGroup",
                   "service_offering_icons": "#/components/schemas/InventoryCollectionServiceOfferingIcon",
                   "service_offerings": "#/components/schemas/InventoryCollectionServiceOffering",
                   "service_plans": "#/components/schemas/InventoryCollectionServicePlan",
                   "source_regions": "#/components/schemas/InventoryCollectionSourceRegion",
+                  "subnets": "#/components/schemas/InventoryCollectionSubnet",
                   "subscriptions": "#/components/schemas/InventoryCollectionSubscription",
                   "vms": "#/components/schemas/InventoryCollectionVm",
                   "volumes": "#/components/schemas/InventoryCollectionVolume",
@@ -1745,11 +1803,19 @@
                   "container_node_tags": "#/components/schemas/InventoryCollectionContainerNodeTag",
                   "container_project_tags": "#/components/schemas/InventoryCollectionContainerProjectTag",
                   "container_template_tags": "#/components/schemas/InventoryCollectionContainerTemplateTag",
+                  "datastore_tags": "#/components/schemas/InventoryCollectionDatastoreTag",
+                  "ipaddress_tags": "#/components/schemas/InventoryCollectionIpaddressTag",
                   "host_tags": "#/components/schemas/InventoryCollectionHostTag",
+                  "network_adapter_tags": "#/components/schemas/InventoryCollectionNetworkAdapterTag",
+                  "network_tags": "#/components/schemas/InventoryCollectionNetworkTag",
+                  "security_group_tags": "#/components/schemas/InventoryCollectionSecurityGroupTag",
                   "service_offering_tags": "#/components/schemas/InventoryCollectionServiceOfferingTag",
+                  "subnet_tags": "#/components/schemas/InventoryCollectionSubnetTag",
                   "vm_tags": "#/components/schemas/InventoryCollectionVmTag",
                   "tags": "#/components/schemas/InventoryCollectionTag",
-                  "volume_attachments": "#/components/schemas/InventoryCollectionVolumeAttachment"
+                  "datastore_mounts": "#/components/schemas/InventoryCollectionDatastoreMount",
+                  "volume_attachments": "#/components/schemas/InventoryCollectionVolumeAttachment",
+                  "vm_security_groups": "#/components/schemas/InventoryCollectionVmSecurityGroup"
                 }
               }
             }
@@ -2141,6 +2207,54 @@
         },
         "additionalProperties": false
       },
+      "InventoryCollectionDatastoreMount": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatastoreMount"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatastoreMount"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionDatastoreTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatastoreTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatastoreTag"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "InventoryCollectionFlavor": {
         "type": "object",
         "required": [
@@ -2213,6 +2327,150 @@
         },
         "additionalProperties": false
       },
+      "InventoryCollectionIpaddress": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ipaddress"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ipaddress"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionIpaddressTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IpaddressTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IpaddressTag"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionNetwork": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Network"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Network"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionNetworkAdapter": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkAdapter"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkAdapter"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionNetworkAdapterTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkAdapterTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkAdapterTag"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionNetworkTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NetworkTag"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "InventoryCollectionOrchestrationStack": {
         "type": "object",
         "required": [
@@ -2232,6 +2490,54 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrchestrationStack"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionSecurityGroup": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecurityGroup"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecurityGroup"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionSecurityGroupTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecurityGroupTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecurityGroupTag"
             }
           }
         },
@@ -2381,6 +2687,54 @@
         },
         "additionalProperties": false
       },
+      "InventoryCollectionSubnet": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subnet"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subnet"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionSubnetTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubnetTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubnetTag"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "InventoryCollectionSubscription": {
         "type": "object",
         "required": [
@@ -2448,6 +2802,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Vm"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionVmSecurityGroup": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VmSecurityGroup"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VmSecurityGroup"
             }
           }
         },
@@ -2575,6 +2953,426 @@
         },
         "additionalProperties": false
       },
+      "Ipaddress": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "kind",
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "ipaddress": {
+                "nullable": true,
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "private",
+                  "public",
+                  "elastic"
+                ],
+                "type": "string"
+              },
+              "network_adapter": {
+                "$ref": "#/components/schemas/NetworkAdapterReference"
+              },
+              "orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "subnet": {
+                "$ref": "#/components/schemas/SubnetReference"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IpaddressReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^ipaddresses$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IpaddressTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "ipaddress",
+              "tag"
+            ],
+            "properties": {
+              "ipaddress": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/IpaddressReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Network": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "cidr": {
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "status": {
+                "nullable": true,
+                "type": "string"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "NetworkAdapter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "device": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/VmReference"
+                  },
+                  {
+                    "$ref": "#/components/schemas/HostReference"
+                  }
+                ]
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "mac_address": {
+                "nullable": true,
+                "type": "string"
+              },
+              "orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "NetworkAdapterReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^network_adapters$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NetworkAdapterTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "network_adapter",
+              "tag"
+            ],
+            "properties": {
+              "network_adapter": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NetworkAdapterReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "NetworkReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^networks$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NetworkTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "network",
+              "tag"
+            ],
+            "properties": {
+              "network": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NetworkReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
       "OrchestrationStack": {
         "allOf": [
           {
@@ -2599,6 +3397,9 @@
                 "nullable": true,
                 "type": "string"
               },
+              "parent_orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
               "resource_timestamp": {
                 "format": "date-time",
                 "nullable": true,
@@ -2616,6 +3417,12 @@
               },
               "source_ref": {
                 "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
               }
             },
             "additionalProperties": false
@@ -2662,6 +3469,143 @@
           }
         },
         "additionalProperties": false
+      },
+      "SecurityGroup": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "network_id": {
+                "nullable": true,
+                "type": "integer"
+              },
+              "orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "SecurityGroupReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^security_groups$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SecurityGroupTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "security_group",
+              "tag"
+            ],
+            "properties": {
+              "security_group": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SecurityGroupReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "ServiceInstance": {
         "allOf": [
@@ -3103,6 +4047,146 @@
         },
         "additionalProperties": false
       },
+      "Subnet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "cidr": {
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "network": {
+                "$ref": "#/components/schemas/NetworkReference"
+              },
+              "orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "status": {
+                "nullable": true,
+                "type": "string"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "SubnetReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^subnets$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubnetTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "subnet",
+              "tag"
+            ],
+            "properties": {
+              "subnet": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SubnetReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
       "Subscription": {
         "allOf": [
           {
@@ -3321,6 +4405,12 @@
               "source_ref": {
                 "type": "string"
               },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              },
               "uid_ems": {
                 "nullable": true,
                 "type": "string"
@@ -3361,6 +4451,47 @@
           }
         },
         "additionalProperties": false
+      },
+      "VmSecurityGroup": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "security_group",
+              "vm"
+            ],
+            "properties": {
+              "security_group": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SecurityGroupReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "vm": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/VmReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "VmTag": {
         "allOf": [
@@ -3427,6 +4558,9 @@
                 "nullable": true,
                 "type": "string"
               },
+              "orchestration_stack": {
+                "$ref": "#/components/schemas/OrchestrationStackReference"
+              },
               "resource_timestamp": {
                 "format": "date-time",
                 "nullable": true,
@@ -3455,6 +4589,9 @@
               "state": {
                 "nullable": true,
                 "type": "string"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
               },
               "volume_type": {
                 "$ref": "#/components/schemas/VolumeTypeReference"
