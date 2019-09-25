@@ -1678,6 +1678,9 @@
                   "$ref": "#/components/schemas/InventoryCollectionOrchestrationStack"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionReservation"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionServiceInstance"
                 },
                 {
@@ -1744,6 +1747,9 @@
                   "$ref": "#/components/schemas/InventoryCollectionNetworkTag"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionReservationTag"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionSecurityGroupTag"
                 },
                 {
@@ -1786,6 +1792,7 @@
                   "network_adapters": "#/components/schemas/InventoryCollectionNetworkAdapter",
                   "networks": "#/components/schemas/InventoryCollectionNetwork",
                   "orchestration_stacks": "#/components/schemas/InventoryCollectionOrchestrationStack",
+                  "reservations": "#/components/schemas/InventoryCollectionReservation",
                   "service_instances": "#/components/schemas/InventoryCollectionServiceInstance",
                   "security_groups": "#/components/schemas/InventoryCollectionSecurityGroup",
                   "service_offering_icons": "#/components/schemas/InventoryCollectionServiceOfferingIcon",
@@ -1808,6 +1815,7 @@
                   "host_tags": "#/components/schemas/InventoryCollectionHostTag",
                   "network_adapter_tags": "#/components/schemas/InventoryCollectionNetworkAdapterTag",
                   "network_tags": "#/components/schemas/InventoryCollectionNetworkTag",
+                  "reservation_tags": "#/components/schemas/InventoryCollectionReservationTag",
                   "security_group_tags": "#/components/schemas/InventoryCollectionSecurityGroupTag",
                   "service_offering_tags": "#/components/schemas/InventoryCollectionServiceOfferingTag",
                   "subnet_tags": "#/components/schemas/InventoryCollectionSubnetTag",
@@ -2490,6 +2498,54 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrchestrationStack"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionReservation": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reservation"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reservation"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionReservationTag": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservationTag"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservationTag"
             }
           }
         },
@@ -3460,6 +3516,145 @@
           }
         },
         "additionalProperties": false
+      },
+      "Reservation": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "end": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "extra": {
+                "nullable": true,
+                "type": "object"
+              },
+              "flavor": {
+                "$ref": "#/components/schemas/FlavorReference"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "source_region": {
+                "$ref": "#/components/schemas/SourceRegionReference"
+              },
+              "start": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "state": {
+                "nullable": true,
+                "type": "string"
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionReference"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ReservationReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^reservations$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReservationTag": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "reservation",
+              "tag"
+            ],
+            "properties": {
+              "reservation": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ReservationReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "tag": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TagReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "Schema": {
         "type": "object",
