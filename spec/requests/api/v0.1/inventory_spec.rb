@@ -265,7 +265,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(expected string, but received Integer).*?/
           )
         end
 
@@ -276,7 +276,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Float but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?/
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(expected string, but received Float).*?/
           )
         end
 
@@ -287,7 +287,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Integer but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?(expected string, but received Integer).*?/
           )
         end
 
@@ -298,7 +298,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is String but it's not valid string).*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?/
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/resource_timestamp).*?(expected string, but received String).*?/
           )
         end
 
@@ -329,7 +329,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is NilClass but it's not valid number).*?(\/schemas\/ContainerNode\/).*?(properties\/allocatable_cpus).*?/
+            /.*?(\/schemas\/ContainerNode\/).*?(properties\/allocatable_cpus).*?(expected number, but received NilClass).*?/
           )
         end
 
@@ -340,7 +340,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Array but it's not valid object).*?(\/schemas\/ContainerNode\/).*?(properties\/node_info).*?/
+            /.*?(\/schemas\/ContainerNode\/).*?(properties\/node_info).*?(expected object, but received Array).*?/
           )
         end
 
@@ -351,7 +351,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(class is Hash but it's not valid array).*?(\/schemas\/ContainerNode\/).*?(properties\/conditions).*?/
+            /.*?(\/schemas\/ContainerNode\/).*?(properties\/conditions).*?(expected array, but received Hash).*?/
           )
         end
       end
@@ -364,7 +364,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(required parameters source_ref not exist).*?(\/schemas\/ContainerGroup\/).*?/
+            /.*?(\/schemas\/ContainerGroup\/).*?(missing required parameters: source_ref).*?/
           )
         end
 
@@ -375,7 +375,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(don't allow null)/
+            /.*?(\/schemas\/ContainerGroup\/).*?(properties\/source_ref).*?(does not allow null values)/
           )
         end
       end
@@ -413,7 +413,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(made_up_ref isn't match \^cross_link_vms\$).*?(\/schemas\/CrossLinkVmReference\/).*?(properties\/inventory_collection_name).*?/
+            /.*?(\/schemas\/CrossLinkVmReference\/).*?(properties\/inventory_collection_name).*?(\^cross_link_vms\$ does not match value: made_up_ref).*?/
           )
         end
 
@@ -451,7 +451,7 @@ RSpec.describe("v0.0.2 - Inventory") do
 
           expect(@response.code).to eq(failed_validation_code)
           match_response_message(
-            /.*?(properties made_up_attr are not defined).*?(\/schemas\/ContainerGroup).*?/
+            /.*?(\/schemas\/ContainerGroup).*?(does not define properties: made_up_attr).*?/
           )
         end
 
