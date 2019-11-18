@@ -4936,6 +4936,9 @@
               "flavor": {
                 "$ref": "#/components/schemas/FlavorReference"
               },
+              "host": {
+                "$ref": "#/components/schemas/HostReference"
+              },
               "host_inventory_uuid": {
                 "description": "UUID of the host in host inventory",
                 "example": "82729f49-ed4e-4fc6-9ca1-b0ffee063874",
