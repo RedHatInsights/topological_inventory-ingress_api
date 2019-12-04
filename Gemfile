@@ -8,7 +8,7 @@ gem 'manageiq-api-common', '~> 2.0', '>= 2.0.1'
 gem 'manageiq-loggers',    '~> 0.1'
 gem 'prometheus-client',   '~> 0.8.0'
 gem 'puma',                '~> 3.0'
-gem 'rack-cors',           '>= 0.4.1'
+gem 'rack-cors',           '>= 1.0.4', '~> 1.0'
 gem 'rails',               '~> 5.2.2'
 
 gem 'manageiq-messaging'
