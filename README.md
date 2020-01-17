@@ -1,9 +1,9 @@
 # Swagger for Rails 5
 
-[![Build Status](https://travis-ci.org/ManageIQ/topological_inventory-api.svg)](https://travis-ci.org/ManageIQ/topological_inventory-api)
-[![Maintainability](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/maintainability)](https://codeclimate.com/github/ManageIQ/topological_inventory-api/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/test_coverage)](https://codeclimate.com/github/ManageIQ/topological_inventory-api/test_coverage)
-[![Security](https://hakiri.io/github/ManageIQ/topological_inventory-ingress_api/master.svg)](https://hakiri.io/github/ManageIQ/topological_inventory-ingress_api/master)
+[![Build Status](https://travis-ci.org/RedHatInsights/topological_inventory-api.svg)](https://travis-ci.org/RedHatInsights/topological_inventory-api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/maintainability)](https://codeclimate.com/github/RedHatInsights/topological_inventory-api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/test_coverage)](https://codeclimate.com/github/RedHatInsights/topological_inventory-api/test_coverage)
+[![Security](https://hakiri.io/github/RedHatInsights/topological_inventory-ingress_api/master.svg)](https://hakiri.io/github/RedHatInsights/topological_inventory-ingress_api/master)
 
 This is a project to provide Swagger support inside the [Ruby on Rails](http://rubyonrails.org/) framework.
 
@@ -47,7 +47,7 @@ wget http://central.maven.org/maven2/org/openapitools/openapi-generator-cli/3.3.
 Fetch the ruby client git repo:
  
 ```
-git clone git@github.com:ManageIQ/topological_inventory-ingress_api-client-ruby.git
+git clone git@github.com:RedHatInsights/topological_inventory-ingress_api-client-ruby.git
 ```
 
 Build the client:
