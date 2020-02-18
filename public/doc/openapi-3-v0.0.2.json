@@ -1708,6 +1708,9 @@
                   "$ref": "#/components/schemas/InventoryCollectionServiceCredential"
                 },
                 {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceCredentialType"
+                },
+                {
                   "$ref": "#/components/schemas/InventoryCollectionServicePlan"
                 },
                 {
@@ -1727,6 +1730,18 @@
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionVolumeType"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceOfferingServiceCredential"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceInstanceServiceCredential"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceOfferingNodeServiceCredential"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceInstanceNodeServiceCredential"
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionClusterTag"
@@ -1819,6 +1834,7 @@
                   "service_offerings": "#/components/schemas/InventoryCollectionServiceOffering",
                   "service_offering_nodes": "#/components/schemas/InventoryCollectionServiceOfferingNode",
                   "service_credentials": "#/components/schemas/InventoryCollectionServiceCredential",
+                  "service_credential_types": "#/components/schemas/InventoryCollectionServiceCredentialType",
                   "service_plans": "#/components/schemas/InventoryCollectionServicePlan",
                   "source_regions": "#/components/schemas/InventoryCollectionSourceRegion",
                   "subnets": "#/components/schemas/InventoryCollectionSubnet",
@@ -1826,6 +1842,10 @@
                   "vms": "#/components/schemas/InventoryCollectionVm",
                   "volumes": "#/components/schemas/InventoryCollectionVolume",
                   "volume_types": "#/components/schemas/InventoryCollectionVolumeType",
+                  "service_offering_service_credentials": "#/components/schemas/InventoryCollectionServiceOfferingServiceCredential",
+                  "service_instance_service_credentials": "#/components/schemas/InventoryCollectionServiceInstanceServiceCredential",
+                  "service_offering_node_service_credentials": "#/components/schemas/InventoryCollectionServiceOfferingNodeServiceCredential",
+                  "service_instance_node_service_credentials": "#/components/schemas/InventoryCollectionServiceInstanceNodeServiceCredential",
                   "cluster_tags": "#/components/schemas/InventoryCollectionClusterTag",
                   "container_group_tags": "#/components/schemas/InventoryCollectionContainerGroupTag",
                   "container_image_tags": "#/components/schemas/InventoryCollectionContainerImageTag",
@@ -2646,6 +2666,30 @@
         },
         "additionalProperties": false
       },
+      "InventoryCollectionServiceCredentialType": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceCredentialType"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceCredentialType"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "InventoryCollectionServiceInstance": {
         "type": "object",
         "required": [
@@ -2689,6 +2733,54 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ServiceInstanceNode"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionServiceInstanceNodeServiceCredential": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInstanceNodeServiceCredential"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInstanceNodeServiceCredential"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionServiceInstanceServiceCredential": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInstanceServiceCredential"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceInstanceServiceCredential"
             }
           }
         },
@@ -2809,6 +2901,54 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ServiceOfferingNode"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionServiceOfferingNodeServiceCredential": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingNodeServiceCredential"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingNodeServiceCredential"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventoryCollectionServiceOfferingServiceCredential": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingServiceCredential"
+            }
+          },
+          "partial_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOfferingServiceCredential"
             }
           }
         },
@@ -3973,6 +4113,9 @@
                 "nullable": true,
                 "type": "string"
               },
+              "service_credential_type": {
+                "$ref": "#/components/schemas/ServiceCredentialTypeReference"
+              },
               "source_created_at": {
                 "format": "date-time",
                 "nullable": true,
@@ -4007,6 +4150,93 @@
           "inventory_collection_name": {
             "type": "string",
             "pattern": "^service_credentials$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceCredentialType": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "archived_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "description": {
+                "nullable": true,
+                "type": "string"
+              },
+              "kind": {
+                "nullable": true,
+                "type": "string"
+              },
+              "name": {
+                "nullable": true,
+                "type": "string"
+              },
+              "namespace": {
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_timestamp": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_created_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_deleted_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ServiceCredentialTypeReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^service_credential_types$"
           },
           "reference": {
             "type": "object",
@@ -4063,9 +4293,6 @@
               },
               "root_service_instance": {
                 "$ref": "#/components/schemas/ServiceInstanceReference"
-              },
-              "service_credential": {
-                "$ref": "#/components/schemas/ServiceCredentialReference"
               },
               "service_inventory": {
                 "$ref": "#/components/schemas/ServiceInventoryReference"
@@ -4132,9 +4359,6 @@
               "root_service_instance": {
                 "$ref": "#/components/schemas/ServiceInstanceReference"
               },
-              "service_credential": {
-                "$ref": "#/components/schemas/ServiceCredentialReference"
-              },
               "service_instance": {
                 "$ref": "#/components/schemas/ServiceInstanceReference"
               },
@@ -4153,6 +4377,79 @@
                 "format": "date-time",
                 "nullable": true,
                 "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ServiceInstanceNodeReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^service_instance_nodes$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceInstanceNodeServiceCredential": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "service_credential",
+              "service_instance_node"
+            ],
+            "properties": {
+              "service_credential": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceCredentialReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "service_instance_node": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceInstanceNodeReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
               }
             },
             "additionalProperties": false
@@ -4190,6 +4487,47 @@
           }
         },
         "additionalProperties": false
+      },
+      "ServiceInstanceServiceCredential": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "service_credential",
+              "service_instance"
+            ],
+            "properties": {
+              "service_credential": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceCredentialReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "service_instance": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceInstanceReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "ServiceInventory": {
         "allOf": [
@@ -4364,9 +4702,6 @@
                 "nullable": true,
                 "type": "string"
               },
-              "service_credential": {
-                "$ref": "#/components/schemas/ServiceCredentialReference"
-              },
               "service_inventory": {
                 "$ref": "#/components/schemas/ServiceInventoryReference"
               },
@@ -4488,9 +4823,6 @@
               "root_service_offering": {
                 "$ref": "#/components/schemas/ServiceOfferingReference"
               },
-              "service_credential": {
-                "$ref": "#/components/schemas/ServiceCredentialReference"
-              },
               "service_inventory": {
                 "$ref": "#/components/schemas/ServiceInventoryReference"
               },
@@ -4509,6 +4841,79 @@
                 "format": "date-time",
                 "nullable": true,
                 "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ServiceOfferingNodeReference": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "inventory_collection_name",
+          "reference",
+          "ref"
+        ],
+        "properties": {
+          "inventory_collection_name": {
+            "type": "string",
+            "pattern": "^service_offering_nodes$"
+          },
+          "reference": {
+            "type": "object",
+            "required": [
+              "source_ref"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "ref": {
+            "type": "string",
+            "pattern": "^manager_ref$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceOfferingNodeServiceCredential": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "service_credential",
+              "service_offering_node"
+            ],
+            "properties": {
+              "service_credential": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceCredentialReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "service_offering_node": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingNodeReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
               }
             },
             "additionalProperties": false
@@ -4546,6 +4951,47 @@
           }
         },
         "additionalProperties": false
+      },
+      "ServiceOfferingServiceCredential": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InventoryObject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "service_credential",
+              "service_offering"
+            ],
+            "properties": {
+              "service_credential": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceCredentialReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "service_offering": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceOfferingReference"
+                  },
+                  {
+                    "type": "object",
+                    "nullable": false,
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "ServiceOfferingTag": {
         "allOf": [
