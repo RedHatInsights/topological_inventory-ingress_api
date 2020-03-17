@@ -8,14 +8,20 @@ module TopologicalInventory
       class InventoryController < ::ApplicationController
         include TopologicalInventory::IngressApi::MessagingClient
 
+        before_action :add_timestamp_to_payload, :only => %i[save_inventory]
+        before_action :validate_request
+
+        def add_timestamp_to_payload
+          body_params['ingress_api_sent_at'] = Time.now.utc.to_s
+        end
+
         def save_inventory
-          json_payload = request.body.read
           retry_count  = 0
           retry_max    = 1
 
           self.class.with_messaging_client do |client|
             begin
-              client.publish_message(save_inventory_payload(json_payload))
+              client.publish_message(save_inventory_payload(body_params.to_json))
             rescue Kafka::DeliveryFailed
               retry_count += 1
               retry unless retry_count > retry_max

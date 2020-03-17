@@ -1618,6 +1618,26 @@
           "total_parts": {
             "type": "integer"
           },
+          "refresh_state_started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refresh_state_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refresh_state_part_collected_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refresh_state_part_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ingress_api_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
           "sweep_scope": {
             "oneOf": [
               {
