@@ -2,7 +2,9 @@ class ApplicationController < ActionController::API
   before_action :validate_request
 
   def body_params
-    ActionController::Parameters.new(JSON.parse(request.body.read))
+    return @body_params if @body_params.present?
+
+    @body_params = JSON.parse(request.body.read)
   end
 
   # Validates against openapi.json
@@ -13,7 +15,7 @@ class ApplicationController < ActionController::API
     self.class.send(:api_doc).validate!(request.method,
                                         request.path,
                                         self.class.send(:api_version),
-                                        body_params.as_json)
+                                        body_params)
   rescue OpenAPIParser::OpenAPIError => exception
     render :json   => {:message    => exception.message,
                        :error_code => exception.class.to_s},
