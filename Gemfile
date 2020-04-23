@@ -14,7 +14,7 @@ gem 'rails',               '~> 5.2.2'
 
 gem 'manageiq-messaging'
 
-gem 'topological_inventory-core', :git => 'https://github.com/RedHatInsights/topological_inventory-core', :branch => 'master'
+gem 'topological_inventory-core', '~> 1.1.1'
 
 group :development, :test do
   gem 'byebug'
