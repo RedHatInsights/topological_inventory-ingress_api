@@ -29,6 +29,12 @@ module TopologicalInventory
     config.autoload_paths << Rails.root.join('lib')
 
     Insights::API::Common::Logging.activate(config)
-    Insights::API::Common::Metrics.activate(config, "topological_inventory_ingress_api")
+    Insights::API::Common::Metrics.activate(
+      config, "topological_inventory_ingress_api", :custom_metrics =>
+      [
+        { :name => "message_on_queue",         :type => :counter, :description => "total number of messages put on the queue" },
+        { :name => "error_processing_payload", :type => :counter, :description => "total number of errors while attempting to messages put on the queue" }
+      ]
+    )
   end
 end
