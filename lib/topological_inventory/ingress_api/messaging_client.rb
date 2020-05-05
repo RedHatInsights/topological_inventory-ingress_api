@@ -39,7 +39,7 @@ module TopologicalInventory
         def new_messaging_client(retry_max = 1)
           retry_count = 0
           begin
-            ManageIQ::Messaging::Client.open(
+            Insights::Messaging::Client.open(
               :encoding => "json",
               :host     => ENV["QUEUE_HOST"] || "localhost",
               :port     => ENV["QUEUE_PORT"] || "9092",
