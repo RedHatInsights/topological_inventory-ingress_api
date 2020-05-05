@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
   private_class_method def self.api_doc
     return @api_doc if @api_doc.present?
 
-    # ManageIQ::Api::Common::Docs caches only major:minor version
+    # Insights::Api::Common::Docs caches only major:minor version
     version_parts = api_version.split('.')
     doc_api_version = if version_parts.size > 2
                         version_parts[0..1].join('.')
