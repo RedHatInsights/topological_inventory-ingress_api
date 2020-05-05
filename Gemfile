@@ -8,7 +8,7 @@ gem 'json-schema',         '~> 2.8'
 gem 'manageiq-api-common', '~> 2.0', '>= 2.0.1'
 gem 'manageiq-loggers',    "~> 0.4.0", ">= 0.4.2"
 gem 'prometheus-client',   '~> 0.8.0'
-gem 'puma',                '>= 4.3.1', '~> 4.3'
+gem 'puma',                '>= 4.3.3', '~> 4.3'
 gem 'rack-cors',           '>= 1.0.4', '~> 1.0'
 gem 'rails',               '~> 5.2.2'
 
