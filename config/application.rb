@@ -28,7 +28,7 @@ module TopologicalInventory
     config.api_only = true
     config.autoload_paths << Rails.root.join('lib')
 
-    ManageIQ::API::Common::Logging.activate(config)
-    ManageIQ::API::Common::Metrics.activate(config, "topological_inventory_ingress_api")
+    Insights::API::Common::Logging.activate(config)
+    Insights::API::Common::Metrics.activate(config, "topological_inventory_ingress_api")
   end
 end
