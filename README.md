@@ -1,4 +1,4 @@
-# Swagger for Rails 5
+# Topological Inventory Ingress API
 
 [![Build Status](https://travis-ci.org/RedHatInsights/topological_inventory-ingress_api.svg)](https://travis-ci.org/RedHatInsights/topological_inventory-ingress_api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/908bba55ba117684bfa3/maintainability)](https://codeclimate.com/github/RedHatInsights/topological_inventory-ingress_api/maintainability)
