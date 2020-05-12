@@ -5764,6 +5764,11 @@
               "source_region": {
                 "$ref": "#/components/schemas/SourceRegionReference"
               },
+              "source_updated_at": {
+                "format": "date-time",
+                "nullable": true,
+                "type": "string"
+              },
               "state": {
                 "nullable": true,
                 "type": "string"
