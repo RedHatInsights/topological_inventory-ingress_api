@@ -14,7 +14,7 @@ gem 'rails',               '~> 5.2.2'
 
 gem 'manageiq-messaging'
 
-gem 'topological_inventory-core', '~> 1.1.1'
+gem 'topological_inventory-core', '~> 1.1.5'
 
 group :development, :test do
   gem 'byebug'
