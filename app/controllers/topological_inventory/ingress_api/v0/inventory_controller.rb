@@ -28,10 +28,12 @@ module TopologicalInventory
             end
           end
 
+          metrics.message_on_queue
           render status: 200, :json => {
             :message => "ok",
           }.to_json
         rescue => e
+          metrics.error_processing_payload
           render :status => 500, :json => {
             :message    => e.message,
             :error_code => e.class.to_s,
@@ -49,6 +51,10 @@ module TopologicalInventory
             :encoding => 'json',
             :payload  => raw_payload,
           }
+        end
+
+        def metrics
+          Insights::API::Common::Metrics
         end
       end
     end
