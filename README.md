@@ -1,8 +1,8 @@
-# Swagger for Rails 5
+# Topological Inventory Ingress API
 
-[![Build Status](https://travis-ci.org/RedHatInsights/topological_inventory-api.svg)](https://travis-ci.org/RedHatInsights/topological_inventory-api)
-[![Maintainability](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/maintainability)](https://codeclimate.com/github/RedHatInsights/topological_inventory-api/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/47776e67dbb7cc572c3b/test_coverage)](https://codeclimate.com/github/RedHatInsights/topological_inventory-api/test_coverage)
+[![Build Status](https://travis-ci.org/RedHatInsights/topological_inventory-ingress_api.svg)](https://travis-ci.org/RedHatInsights/topological_inventory-ingress_api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/908bba55ba117684bfa3/maintainability)](https://codeclimate.com/github/RedHatInsights/topological_inventory-ingress_api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/908bba55ba117684bfa3/test_coverage)](https://codeclimate.com/github/RedHatInsights/topological_inventory-ingress_api/test_coverage)
 [![Security](https://hakiri.io/github/RedHatInsights/topological_inventory-ingress_api/master.svg)](https://hakiri.io/github/RedHatInsights/topological_inventory-ingress_api/master)
 
 This is a project to provide Swagger support inside the [Ruby on Rails](http://rubyonrails.org/) framework.
