@@ -18,7 +18,9 @@ gem 'topological_inventory-core', '~> 1.1.1'
 
 group :development, :test do
   gem 'byebug'
-  gem 'simplecov'
+  gem 'rubocop',             "~>0.69.0", :require => false
+  gem 'rubocop-performance', "~>1.3",    :require => false
+  gem "simplecov",           "~>0.17.1"
 end
 
 group :test do
