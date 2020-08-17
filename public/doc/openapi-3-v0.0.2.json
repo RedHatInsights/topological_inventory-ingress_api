@@ -1618,14 +1618,6 @@
           "total_parts": {
             "type": "integer"
           },
-          "refresh_state_started_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "refresh_state_sent_at": {
-            "type": "string",
-            "format": "date-time"
-          },
           "refresh_state_part_collected_at": {
             "type": "string",
             "format": "date-time"
@@ -1634,9 +1626,20 @@
             "type": "string",
             "format": "date-time"
           },
+          "refresh_state_started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refresh_state_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
           "ingress_api_sent_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "refresh_type": {
+            "type": "string"
           },
           "sweep_scope": {
             "oneOf": [
@@ -1825,6 +1828,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/InventoryCollectionVmSecurityGroup"
+                },
+                {
+                  "$ref": "#/components/schemas/InventoryCollectionServiceInstanceTask"
                 }
               ],
               "discriminator": {
@@ -1886,7 +1892,8 @@
                   "tags": "#/components/schemas/InventoryCollectionTag",
                   "datastore_mounts": "#/components/schemas/InventoryCollectionDatastoreMount",
                   "volume_attachments": "#/components/schemas/InventoryCollectionVolumeAttachment",
-                  "vm_security_groups": "#/components/schemas/InventoryCollectionVmSecurityGroup"
+                  "vm_security_groups": "#/components/schemas/InventoryCollectionVmSecurityGroup",
+                  "service_instance_tasks": "#/components/schemas/InventoryCollectionServiceInstanceTask"
                 }
               }
             }
