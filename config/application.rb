@@ -28,6 +28,7 @@ module TopologicalInventory
     config.api_only = true
     config.autoload_paths << Rails.root.join('lib')
 
+    config.log_level = (ENV['RAILS_LOG_LEVEL'] || 'debug').downcase.to_sym
     Insights::API::Common::Logging.activate(config)
     Insights::API::Common::Metrics.activate(
       config, "topological_inventory_ingress_api", :custom_metrics =>
