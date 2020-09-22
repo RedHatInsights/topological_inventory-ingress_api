@@ -12,9 +12,7 @@ gem 'puma',                '>= 4.3.5'
 gem 'rack-cors',           '>= 1.0.4'
 gem 'rails',               '~> 5.2.2'
 
-gem 'manageiq-messaging'
-
-gem 'topological_inventory-core', '~> 1.1.5'
+gem 'manageiq-messaging', '~> 1.0.0'
 
 group :development, :test do
   gem 'byebug'
