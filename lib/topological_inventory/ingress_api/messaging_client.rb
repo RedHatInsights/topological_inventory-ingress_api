@@ -16,10 +16,12 @@ module TopologicalInventory
 
           begin
             yield messaging_client
-          rescue Kafka::MessageSizeTooLarge
-            # Don't reset the connection for user-error
-            raise
-          rescue Kafka::Error
+          rescue ::Rdkafka::RdkafkaError => e
+            if (e.message =~ /(msg_size_too_large)/).present?
+              # Don't reset the connection for user-error
+              raise
+            end
+
             # If we hit an underlying kafka error then reset the connection
             messaging_client.close
             self.messaging_client = nil
