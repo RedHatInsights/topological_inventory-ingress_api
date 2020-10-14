@@ -22,7 +22,7 @@ module TopologicalInventory
           self.class.with_messaging_client do |client|
             begin
               client.publish_message(save_inventory_payload(body_params.to_json))
-            rescue Kafka::DeliveryFailed
+            rescue ::Rdkafka::Producer::DeliveryHandle::WaitTimeoutError
               retry_count += 1
               retry unless retry_count > retry_max
             end
