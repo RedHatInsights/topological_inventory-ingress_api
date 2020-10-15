@@ -48,7 +48,7 @@ module TopologicalInventory
               :protocol => :Kafka,
             )
           end
-        rescue Kafka::ConnectionError
+        rescue ::Rdkafka::RdkafkaError
           retry_count += 1
           retry unless retry_count > retry_max
         end
