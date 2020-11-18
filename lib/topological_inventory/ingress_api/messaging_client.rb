@@ -5,13 +5,11 @@ module TopologicalInventory
 
       included do
         private_class_method :messaging_client,
-                             :messaging_client=,
                              :new_messaging_client
       end
 
       module ClassMethods
         def with_messaging_client
-          messaging_client ||= new_messaging_client
           raise if messaging_client.nil?
 
           begin
@@ -31,11 +29,7 @@ module TopologicalInventory
         end
 
         def messaging_client
-          Thread.current[:messaging_client]
-        end
-
-        def messaging_client=(value)
-          Thread.current[:messaging_client] = value
+          @messaging_client ||= new_messaging_client
         end
 
         def new_messaging_client(retry_max = 1)
