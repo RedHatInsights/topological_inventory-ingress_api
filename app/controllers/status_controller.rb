@@ -1,3 +1,5 @@
 class StatusController < ::ApplicationController
-  include Insights::API::Common::Status::Api
+  def health
+    head :ok
+  end
 end
