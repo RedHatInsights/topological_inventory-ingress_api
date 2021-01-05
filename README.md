@@ -1,6 +1,6 @@
 # Topological Inventory Ingress API
 
-[![Build Status](https://travis-ci.org/RedHatInsights/topological_inventory-ingress_api.svg)](https://travis-ci.org/RedHatInsights/topological_inventory-ingress_api)
+[![Build Status](https://travis-ci.com/RedHatInsights/topological_inventory-ingress_api.svg)](https://travis-ci.com/RedHatInsights/topological_inventory-ingress_api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/908bba55ba117684bfa3/maintainability)](https://codeclimate.com/github/RedHatInsights/topological_inventory-ingress_api/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/908bba55ba117684bfa3/test_coverage)](https://codeclimate.com/github/RedHatInsights/topological_inventory-ingress_api/test_coverage)
 [![Security](https://hakiri.io/github/RedHatInsights/topological_inventory-ingress_api/master.svg)](https://hakiri.io/github/RedHatInsights/topological_inventory-ingress_api/master)
