@@ -5531,6 +5531,10 @@
               "flavor": {
                 "$ref": "#/components/schemas/FlavorReference"
               },
+              "guest_info": {
+                "nullable": true,
+                "type": "string"
+              },
               "host": {
                 "$ref": "#/components/schemas/HostReference"
               },
