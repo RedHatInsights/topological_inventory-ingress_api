@@ -5,11 +5,6 @@ cache: bundler
 rvm:
 - 2.5.7
 - 2.6.5
-addons:
-  postgresql: '10'
-env:
-  global:
-  - DATABASE_URL="postgresql://postgres:@localhost:5432/topological_inventory_ingress_api_test?encoding=utf8&pool=5&wait_timeout=5"
 before_install:
 - gem install bundler
 before_script:
@@ -17,6 +12,5 @@ before_script:
   > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - "./cc-test-reporter before-build"
-- bundle exec rake db:create db:migrate
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
