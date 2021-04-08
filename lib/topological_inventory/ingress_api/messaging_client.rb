@@ -1,3 +1,5 @@
+require "topological_inventory/ingress_api/clowder_config"
+
 module TopologicalInventory
   module IngressApi
     module MessagingClient
@@ -37,8 +39,8 @@ module TopologicalInventory
           begin
             ManageIQ::Messaging::Client.open(
               :encoding => "json",
-              :host     => ENV["QUEUE_HOST"] || "localhost",
-              :port     => ENV["QUEUE_PORT"] || "9092",
+              :host     => TopologicalInventory::IngressApi::ClowderConfig.instance['kafkaHost'],
+              :port     => TopologicalInventory::IngressApi::ClowderConfig.instance['kafkaPort'],
               :protocol => :Kafka,
             )
           end

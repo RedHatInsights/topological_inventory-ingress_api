@@ -1,6 +1,7 @@
 require "topological_inventory/ingress_api"
 require "topological_inventory/ingress_api/docs"
 require "topological_inventory/ingress_api/messaging_client"
+require "topological_inventory/ingress_api/clowder_config"
 
 module TopologicalInventory
   module IngressApi
@@ -46,7 +47,7 @@ module TopologicalInventory
 
         def save_inventory_payload(raw_payload)
           {
-            :service  => "platform.topological-inventory.persister",
+            :service  => TopologicalInventory::IngressApi::ClowderConfig.kafka_topic("platform.topological-inventory.persister"),
             :message  => "save_inventory",
             :encoding => 'json',
             :payload  => raw_payload,

@@ -36,7 +36,8 @@ COPY . $WORKDIR
 RUN chgrp -R 0 $WORKDIR && \
     chmod -R g=u $WORKDIR
 
-EXPOSE 3000
+# for compatibility with CI
+EXPOSE 3000 8000
 
 ENV RAILS_ENV production
 # Set a value even if we don't use it so active record doesn't blow up
